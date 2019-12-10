@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <meta charset="UTF-8">
+    <title>Wyszukiwanie elementów</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+  <ul class="menu">
+    <li><a href="#">Start</a></li>
+    <li><a href="#">O nas</a></li>
+    <li><a href="#">Portfolio</a></li>
+    <li><a href="#">Galeria</a></li>
+    <li><a href="#">Kontakt</a></li>
+  </ul>
+
+  <section class="main">
+    <h1>Foo Bar's website</h1>
+    <div class="container">
+        <ol>
+           <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+           <li>Aliquam tincidunt mauris eu risus.</li>
+           <li>Vestibulum auctor dapibus neque. <a href="#">Kontakt</a></li>
+        </ol>
+    </div>
+  </section>
+
+  <section class="articles">
+    <div class="container">
+        <ol>
+           <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+           <li>Aliquam tincidunt <a href="www.google.pl" id="googleLink">Zobacz więcej</a> mauris eu risus.</li>
+           <li>Vestibulum auctor dapibus neque.</li>
+        </ol>
+    </div>
+  </section>
+
+  <section class="links">
+    <nav>
+      	<a href="#" data-hover="JavaScript"><span>Backbone</span></a>
+      	<a href="#" data-hover="Angular"><span>JavaScript</span></a>
+      	<a href="#" data-hover="Backbone"><span>Angular</span></a>
+      	<a href="#" data-hover="Ember"><span>Ember</span></a>
+    </nav>
+  </section>
+
+  <section class="form">
+    <form action="">
+        <label> Podaj imię:
+            <input type="text" value="name" id="name">
+        </label>
+        <label> Podaj email:
+            <input type="email" value="email" id="email">
+        </label>
+    </form>
+  </section>
+
+  <script src="./jquery.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

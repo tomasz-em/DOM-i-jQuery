@@ -1,0 +1,24 @@
+#addUser,
+#age {
+    margin-top: 10px;
+    padding: 5px;
+}
+
+body {
+    padding: 20px;
+}
+
+div {
+    background-color: #ddd;
+    border: 1px solid #ccc;
+    margin: 10px auto;
+    padding: 10px;
+}
+
+span {
+    background-color: #000;
+    color: #fff;
+    display: block;
+    padding: 5px 10px;
+    width: 80px;
+}

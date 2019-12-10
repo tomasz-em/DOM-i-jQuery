@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <meta charset="UTF-8">
+    <title>Obsługa eventów</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <nav class="menu">
+      <a href="#">Start</a>
+      <a href="#">About heroes</a>
+      <a href="#">Portfolios</a>
+      <a href="#">Contact</a>
+  </nav>
+
+  <div class="hero-buttons">
+    <p>Sprawdź supermoce dla kliknięć w konsoli!</p>
+    <button class="ironman-btn" data-feature="armament">Iron Man</button>
+    <button class="thor-btn" data-feature="hammer">Thor</button>
+    <button class="wolverine-btn" data-feature="claws">Wolverine</button>
+  </div>
+
+ <section class="superhero-description">
+   <p>Etykiety nagłówków reagują w konsoli na najechanie kursorem, zaś ich kliknięcie rozwija szczegółowy opis.</p>
+   <dl>
+  	<dt>Iron Man</dt>
+  	<dd>
+      Iron Man jest superbohaterem, który walczy ze zbrodnią za pomocą skonstruowanych
+      przez siebie serii cybernetycznych zbroi, wyposażonych w najnowocześniejsze technologie.
+      Jako Tony Stark prowadzi życie bogatego przedsiębiorcy i filantropa,
+      kierującego konglomeratem Stark Industries. Jest członkiem elitarnej grupy
+      superherosów o nazwie Avengers.
+    </dd>
+
+  	<dt>Thor</dt>
+  	<dd>
+      Thor został stworzony przez Stana Lee, Jacka Kirby’ego i Larry'ego Liebera.
+      Pierwszy raz postać ta pojawiła się w roku 1962, w Journey into Mystery vol. 1 #83.
+      Postać oparta jest na Thorze, bogu z mitologii nordyckiej.
+      Thor jest jednym z założycieli Avengers, członkiem grupy we wszystkich czterech
+      wydaniach komiksu.
+    </dd>
+  	<dt>Wolverine</dt>
+  	<dd>
+      Wolverine jest pochodzącym z Kanady mutantem, którego cechuje zdolność
+      szybkiej regeneracji uszkodzonych tkanek ciała. Ma kostne szpony chowane w
+      przedramionach obu rąk (później jego szkielet i szpony zostały zespolone z adamantium).
+      Jego pseudonim tłumaczy się na język polski jako „rosomak”, co wiąże się z jego dziką naturą.
+      Należał do grup X-Men, The Avengers i Alpha Flight.
+    </dd>
+    </dl>
+  </section>
+
+  <h2>Lista zakupowa:</h2>
+   <section class="shopping">
+       <article class="cart-item">
+           <h2>Banany</h2>
+           <button>Dodaj</button>
+       </article>
+
+       <article class="cart-item">
+           <h2>Kotlety</h2>
+           <button>Dodaj</button>
+       </article>
+
+       <article class="cart-item">
+           <h2>Mleko</h2>
+           <button>Dodaj</button>
+       </article>
+
+   </section>
+
+  <script src="./jquery.min.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

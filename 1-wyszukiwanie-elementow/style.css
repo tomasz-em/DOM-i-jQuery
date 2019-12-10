@@ -1,0 +1,91 @@
+.borderClass {
+    border: 1px solid purple;
+}
+
+.colorText {
+    color: red;
+}
+
+.backgroundElement {
+    background-color: yellow;
+}
+
+.creepyHeader {
+    padding-bottom: 2em;
+    color: silver;
+    text-shadow: 4px 4px 1px #300000,
+    4px 6px 1px #400000,
+    4px 8px 1px #500000,
+    4px 10px 1px #600000,
+    4px 12px 1px #700000,
+    4px 14px 1px #800000,
+    4px 16px 1px #900000,
+    4px 18px 1px #A00000,
+    4px 20px 1px #B00000,
+    4px 22px 1px #C00000,
+    4px 24px 1px #D00000,
+    4px 26px 1px #E00000,
+    4px 28px 1px #F00000,
+    4px 30px 1px #FA0000,
+    4px 32px 1px #FB0000,
+    4px 34px 1px #FC0000,
+    4px 36px 1px #FD0000,
+    4px 38px 1px #FE0000,
+    4px 40px 2px #FF0000;
+}
+
+.menu {
+    background-color: #ecf0f1;
+    padding: 80px;
+}
+
+.articles {
+    background-color: #435a6b;
+    padding: 80px;
+}
+
+.links {
+    background-color: #2ac56c;
+    padding: 80px;
+}
+
+.redLinks a {
+    color: #f00;
+}
+
+.xl-font {
+    font-size: x-large;
+}
+
+.hover-effect a {
+    color: rgba(0, 0, 0, 0.2);
+    font-weight: 700;
+    margin-right: 20px;
+    text-shadow: none;
+    text-decoration: none;
+}
+
+.hover-effect a::before {
+    color: #fff;
+    content: attr(data-hover);
+    position: absolute;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.hover-effect a:hover::before,
+.hover-effect a:focus::before {
+    -webkit-transform: scale(0.9);
+    -moz-transform: scale(0.9);
+    opacity: 0;
+    transform: scale(0.9);
+}
+
+
+/* DODANE: */
+.menuLinks {
+    text-decoration-color: black;
+}
+
+.form {
+    padding: 2em;
+}

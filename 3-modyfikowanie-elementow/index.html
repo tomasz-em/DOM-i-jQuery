@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pl-PL">
+<head>
+    <meta charset="UTF-8">
+    <title>Modyfikowanie elementów</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <section class="people">
+        <div ><p>Podaj własne nowe nazwy, ponieważ nie uda się wprowadzić pustych lub domyślnych treści w poniższych polach!</p></div>
+        <input type="text" value="Wpisz imię i nazwisko" id="addUser"/>
+        <input type="text" value="Wpisz wiek" id="age"/>
+        <input type="submit" value="dodaj"/>
+        <ul class="main">
+            <li data-age="63">John Travolta</li>
+            <li data-age="18">Angelina Jolie</li>
+            <li data-age="50">Barack Obama</li>
+            <li data-age="14">Krzysztof Ibisz</li>
+        </ul>
+    </section>
+    <section>
+        <div class="graphic">Lorem ipsum dolor sit amet consectetur adipiscing elitr sed diam nonumy tempe goreng.
+            <img src="graphic.png" alt="schemat zadania dla SPAN" />
+            <h3>Poniżej powstaną elementy na wzór powyższego obrazka</h3>
+        </div>
+    </section>
+
+    <section>
+        <h2>Elementy z liczbą powinny dać się klikać i przeskakiwać lewa na prawą stronę (i tam pozostać)</h2>
+        <div class="left">
+            <div class="block">1</div>
+            <div class="block">2</div>
+            <div class="block">3</div>
+            <div class="block">4</div>
+            <div class="block">5</div>
+            <div class="block">6</div>
+            <div class="block">7</div>
+            <div class="block">8</div>
+            <div class="block">9</div>
+            <div class="block">10</div>
+        </div>
+        <div class="right"></div>
+    </section>
+
+    <script src="./jquery.min.js"></script>
+    <script src="./app.js"></script>
+</body>
+</html>

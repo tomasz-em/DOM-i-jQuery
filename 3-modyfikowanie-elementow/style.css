@@ -1,0 +1,70 @@
+#addUser,
+#age {
+    margin-top: 10px;
+    padding: 5px;
+}
+
+body {
+    padding: 20px;
+}
+
+div {
+    background-color: #ddd;
+    border: 1px solid #ccc;
+    margin: 10px auto;
+    padding: 10px;
+}
+
+span {
+    background-color: #000;
+    color: #fff;
+    display: block;
+    padding: 5px 10px;
+    width: 80%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.left {
+    float: left;
+    width: 45%;
+}
+
+.right {
+    float: right;
+    width: 45%;
+}
+
+/* ----  DODANE  ---- */
+
+.block {
+    cursor: pointer;
+}
+
+.graphic span {
+    display: block;
+    color: white;
+    font-size: 1.5em;
+}
+
+.pojemnik {
+    background-color: white;
+    border: 3px solid black;
+}
+
+.pasek {
+    padding: 0.5em 2em;
+    margin: 0.5em 3em;
+    width: 80%;
+    background-color: #c220c2;
+    font-weight: bold;
+}
+
+.pojemnik > .pasek {
+    padding: 0.5em;
+    margin: 0.5em 10em;
+    width: 60%;
+}
+

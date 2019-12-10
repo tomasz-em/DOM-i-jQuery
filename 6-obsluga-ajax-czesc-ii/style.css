@@ -1,0 +1,25 @@
+html {
+    background: #E0E0E0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 50px auto;
+    width: 500px;
+}
+
+ul {
+    background: #00a99d;
+}
+
+li {
+    border-top: 1px solid white;
+    color: white;
+    font-size: 18px;
+    padding: 5px;
+}
+
+span {
+    display: inline-block;
+    margin-left: 20px;
+}

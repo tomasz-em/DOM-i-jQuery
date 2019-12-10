@@ -1,0 +1,55 @@
+body {
+    margin: auto;
+    text-align: center;
+    width: 500px;
+}
+
+.hero-buttons {
+    margin: 0.5em;
+    padding: 0.5em;
+    border: 1px solid #ccc;
+}
+
+dd {
+    margin: 0;
+    padding: 1em 0.5em;
+    border: 1px solid #e3e3e3;
+    text-align: justify;
+}
+
+dt {
+    background: #e3e3e3;
+    border-bottom: 1px solid #c5c5c5;
+    border-top: 1px solid white;
+    cursor: pointer;
+    font-size: 1.5em;
+    font-weight: bold;
+    line-height: 2em;
+}
+
+dt:first-child {
+    border-top: none;
+}
+
+dt:nth-last-child(2) {
+    border-bottom: none;
+}
+
+p {
+    background-color: #ccc;
+    border: 2px dotted #666;
+    padding: 0.5em 1em;
+    margin: 0.5em;
+}
+
+.hide {
+    display: none;
+}
+
+.cart-item {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 15px;
+    width: 300px;
+}
