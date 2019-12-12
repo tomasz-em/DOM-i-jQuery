@@ -35,7 +35,7 @@ var $przyciskDodaj = $('.people').find('input[type="submit"]');
         else {
             if ( ( isNaN(wiek) ) || ( wiek < 0 ) ) wiek = 0;    // jeszcze raz prawie to samo, ale teraz może zmienić wartość z formulaza, gdy jest on błędna
             $('input').css('backgroundClor', '');  
-        $nowyElementLI= $('<li>', { 'data-age': wiek }).text(ktos);     // tworzenie elementu z konkretną zawartością
+        $nowyElementLI = $('<li>', { 'data-age': wiek }).text(ktos);     // tworzenie elementu z konkretną zawartością
         $listaOsobistosci.append( $nowyElementLI );     // do istniejącej listy przypięcie nowego LI  
         $('#addUser').val('');  // zerowanie zawartości pola, skąd pobrano już treść 
         $('#age').val('');      // zerowanie zawartości pola, czyści treść po użyciu bieżącej zawartości

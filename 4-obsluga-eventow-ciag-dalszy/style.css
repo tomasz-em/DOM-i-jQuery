@@ -22,3 +22,49 @@ span {
     padding: 5px 10px;
     width: 80px;
 }
+
+/* +++++ DODANE +++++ */
+
+ul > li {
+    padding: 0.25em;
+}
+
+ul > li:nth-child(2n-1) {
+    background-color: #ddd;;
+}
+
+
+li > button {
+    display: inline-block;
+    margin-left: 1em; 
+}
+
+h2 > span {
+    font-size: 0.7em;
+    color: #333;
+    background-color: initial;
+    display: initial;
+}
+
+.panel {
+    padding: 1em;
+    background-color: #ccc;
+    border: 2px dotted #666;
+    max-width: 30%;
+}
+
+.panel > div {
+    margin: -1em;
+}
+
+.panel:last-of-type {
+    margin-bottom: 10em;;
+}
+
+.ukryte {
+    display: none;
+}
+
+.tlo-jasnoszare {
+    background-color: #ddd;
+}
