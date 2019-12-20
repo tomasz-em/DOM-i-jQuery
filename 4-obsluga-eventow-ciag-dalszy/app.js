@@ -38,7 +38,7 @@ $elementWczesniejszy = $('.people');
         // e.stopPropagation();
     });
 
-// ---- to samo, ale poprzez funkcję dla zadzenia HOVER() ----
+// ---- to samo, ale poprzez funkcję dla zdarzenia HOVER() ----
 
     $tresciWstepnieUkryte2 = $('<div>', { class: 'ukryte' });   // nowa klasa, domyślnie niewidoczny element od razu
     $tresciWstepnieUkryte2.html('<h3>... w Ruinach Zamczyska ani na wyspie Bagnistego Jeziora, ani w Żelaznej Jaskini</h3><p>Nic więcej z siebie nie wyduszę, ni grama pomocy!</p>')
