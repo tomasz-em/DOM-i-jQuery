@@ -77,7 +77,7 @@ function odpytajOKalendarzSwiat( rokSprawdzany ) {
 function dodajPoprzedniRokDoNaglowkaStrony( rok ) {
 var $naglowekH2 = $('h2'),
     trescTekstowa = $naglowekH2.text() + " (niekoniecznie dni wolnych) w roku " + rok,  // aktualizacja odczytanego o zadany tekst z parametru
-    $nowyH4 = $('<h4>').text("API nie obsługuje listy po polsku. Za darmo :/")
+    $nowyH4 = $('<h4>').text("API nie obsługuje listy po polsku. Bynajmniej nie za darmo, tylko za $$$.");
 
     $naglowekH2.text( trescTekstowa );
     $naglowekH2.after( $nowyH4 );
@@ -89,11 +89,11 @@ var dataDzis = new Date(),
     rokPoprzedni = dataDzis.getFullYear() - 1,    // odczyt roku wcześniejszego niż bieżący (tylko na niego zezwala API)
     $actionButton = $('#holiday-checker'),
     $miejsceDocelowe = $('#holidays-placeholder'),
-    $powiadamiacz = $('#notifier'),
-    $listaSwiat = '';
+    $powiadamiacz = $('#notifier');
 
 dodajPoprzedniRokDoNaglowkaStrony( rokPoprzedni );
 
+    // nasłuchiwacz na kliknięcie - pojedynczy wyzwalacz na żądanie (dla sukcesu)  
 $actionButton.on('click', function(){
     $listaSwiat = odpytajOKalendarzSwiat( rokPoprzedni );
     $(this).attr('disabled', true);

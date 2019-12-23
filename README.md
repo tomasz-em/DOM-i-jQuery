@@ -165,7 +165,7 @@ Przydatne informacje:
 * do elementu **h3** dodaj tytuł filmu
 * wstaw element **h3** do **li**, a następnie wszystko do listy **ul**
 
-[Rozwiązanie (przyszłe) dla tej listy zadań (0/1)](https://tomasz-em.github.io/DOM-i-jQuery/5-obsluga-ajax-czesc-i/index.html)
+[Rozwiązanie dla tej listy zadań (1/1)](https://tomasz-em.github.io/DOM-i-jQuery/5-obsluga-ajax-czesc-i/index.html)
 |
 [Plik JS z poleceniem i rozwiązaniem](https://tomasz-em.github.io/DOM-i-jQuery/5-obsluga-ajax-czesc-i/app.js)
 
@@ -187,6 +187,6 @@ Każdą nazwę święta wczytaj do elementu **li**, jego datę również wczytaj
 ### Uwaga
 Sprawdź w konsoli jak wyglądają wczytywane dane, aby ułatwić sobie ich obróbkę.
 
-[Rozwiązanie (przyszłe) dla tej listy zadań (0/1)](https://tomasz-em.github.io/DOM-i-jQuery/6-obsluga-ajax-czesc-ii/index.html)
+[Rozwiązanie dla tej listy zadań (1/1)](https://tomasz-em.github.io/DOM-i-jQuery/6-obsluga-ajax-czesc-ii/index.html)
 |
 [Plik JS z poleceniem i rozwiązaniem](https://tomasz-em.github.io/DOM-i-jQuery/6-obsluga-ajax-czesc-ii/app.js)
