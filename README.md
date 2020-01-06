@@ -1,9 +1,7 @@
 # DOM i jQuery
-### _Wstęp do DOM oraz biblioteka jQuery_, **zjazd 3** `2019 XII 08`
+### _Wstęp do Document Object Model oraz biblioteka jQuery_, **zjazd 3** `2019 XII 08`
 
-___
-
-### Używanie biblioteki jQuery do przeprowadzania podstawowych operacji na elementach HTML
+### używanie JavaScriptu do przeprowadzania podstawowych operacji na elementach HTML
 * wyszukiwanie
 * modyfikowanie (treść, atrybuty oraz własności CSS)
 * wstawianie nowych elementów wraz z przygotowaną zawartością i ich parametrami (jak modyfikacja) 
@@ -13,8 +11,104 @@ ___
   - interakcja z elementami (elementy aktywne formularzy, wskaźnik myszki a dowolne elementy) 
 * komunikacja poprzez AJAX
 * użycie w REST API
+### użycie biblioteki jQuery do łatwiejszego osiągnięcia powyższych celów
+
+_____
+
+# Document Object Model (DOM) - lista zadań
+
+### 1. Timer (folder `dom-1-timer`)
+Stwórz timer składający się z dwóch inputów (minuty i sekundy) oraz buttona “Start”,
+który rozpoczyna odliczanie zadanego czasu. Stan ma być aktualizowany co sekundę.
+W trakcie trwania odliczania oba inputy mają być zablokowane (disabled).
+
+![Komponent timera](https://tomasz-em.github.io/DOM-i-jQuery/polecenia-dom--obrazy/dom-1-timer.jpg "Komponent timera")
+
+[Rozwiązanie dla tego zadania (0/1)](https://tomasz-em.github.io/DOM-i-jQuery/dom-1-timer/index.html)
+|
+[Plik JS z poleceniem i rozwiązaniem](https://tomasz-em.github.io/DOM-i-jQuery/dom-1-timer/timer.js)
+
+---
+### 2. Newsletter (folder `dom-2-newsletter`)
+Stwórz dialog subskrypcji do newslettera; musi mieć miejsce na tytuł, treść, input na
+imię subskrybenta, input na e-mail subskrybenta, button "Subscribe" i miejsce na logo.
+
+![Komponent newslettera](https://tomasz-em.github.io/DOM-i-jQuery/polecenia-dom--obrazy/dom-2-newsletter.jpg "Komponent newslettera")
+
+[Rozwiązanie dla tego zadania (0/1)](https://tomasz-em.github.io/DOM-i-jQuery/dom-2-newsletter/index.html)
+|
+[Plik JS z poleceniem i rozwiązaniem](https://tomasz-em.github.io/DOM-i-jQuery/dom-2-newsletter/newsletter.js)
+
+---
+### 3. Konwerter temperatur (folder `dom-3-konwerter-C--F`)
+Stwórz konwerter temperatur; musi umożliwiać przeliczanie stopni Celsjusza na stopnie
+Fahrenheita i odwrotnie; musi mieć guzik do szybkiego odwrócenia konwersji.
+
+![Komponent konwertera temperatury](https://tomasz-em.github.io/DOM-i-jQuery/polecenia-dom--obrazy/dom-3-konwerter-C--F.jpg "Komponent konwertera temperatury")
+
+[Rozwiązanie dla tego zadania (0/1)](https://tomasz-em.github.io/DOM-i-jQuery/dom-3-konwerter-C--F/index.html)
+|
+[Plik JS z poleceniem i rozwiązaniem](https://tomasz-em.github.io/DOM-i-jQuery/dom-3-konwerter-C--F/temp-converter.js)
+
+---
+### 4. Rejestracja użytkownika (folder `dom-4-rejestracja-uzytkownika`)
+Stwórz dialog rejestracji; musi mieć miejsce na logo, tytuł, input na login oraz input na
+hasło ze wskaźnikiem siły hasła o trzech stopniach: weak (poziom startowy), average
+(min. 8 znaków, min. 1 wielka litera) i strong (min. 12 znaków, min. 1 wielka litera, min.
+1 cyfra). Przycisk Sign up ma być aktywny, gdy oba pola są wypełnione.
+
+![Komponent rejestracji użytkownika](https://tomasz-em.github.io/DOM-i-jQuery/polecenia-dom--obrazy/dom-4-rejestracja-uzytkownika.jpg "Komponent rejestracji użytkownika")
+
+[Rozwiązanie dla tego zadania (0/1)](https://tomasz-em.github.io/DOM-i-jQuery/dom-4-rejestracja-uzytkownika/index.html)
+|
+[Plik JS z poleceniem i rozwiązaniem](https://tomasz-em.github.io/DOM-i-jQuery/dom-4-rejestracja-uzytkownika/register-me.js)
+
+---
+### 5. Lista to-do (folder `dom-5-lista-to-do`)
+Stwórz listę to-do; musi mieć input umożliwiający wprowadzanie zadań do wykonania
+oraz odpowiedni button; musi listować zapisane zadania do wykonania wraz z inputem
+typu checkbox, który ma służyć odznaczaniu wykonanych zadań. Ponadto, checkbox
+“show completed” ma powodować wylistowanie wszystkich wykonanych zadań.
+
+![Komponent listy to-do](https://tomasz-em.github.io/DOM-i-jQuery/polecenia-dom--obrazy/dom-5-lista-to-do.jpg "Komponent listy to-do")
+
+[Rozwiązanie dla tego zadania (0/1)](https://tomasz-em.github.io/DOM-i-jQuery/dom-5-lista-to-do/index.html)
+|
+[Plik JS z poleceniem i rozwiązaniem](https://tomasz-em.github.io/DOM-i-jQuery/dom-5-lista-to-do/to-do-list.js)
+
+---
+### 6. Kalkulator walut (folder `dom-6-kalkulator-walut`)
+Stwórz kalkulator walut; musi mieć select umożliwiający wybór waluty źródłowej i select
+umożliwiający wybór waluty docelowej spośród złotych, euro, dolarów i funtów;
+kalkulator walut dokonuje przeliczeń w oparciu o ceny zwrócone z API fixer.io
+Wejdź na stronę [fixer.io/signup/free](fixer.io/signup/free) i zarejestruj się. Na potrzeby rejestracji możesz
+podać tymczasowy e-mail. Celem jest uzyskanie klucza dostępu do API.
+Wykonaj zapytanie typu GET pod adres podany poniżej; pamiętaj, aby wstawić we wskazane miejsce `swój klucz API`:
+[http://data.fixer.io/api/latest?access_key=KLUCZ_DO_API&symbols=PLN,EUR,USD](http://data.fixer.io/api/latest?access_key=KLUCZ_DO_API&symbols=PLN,EUR,USD)
+W zależności od walut przekazanych do parametru symbols, serwer zwróci inną odpowiedź zawierającą ceny żądanych walut.
+
+![Komponent kalkulatora walut](https://tomasz-em.github.io/DOM-i-jQuery/polecenia-dom--obrazy/dom-6-kalkulator-walut.jpg "Komponent kalkulatora walut")
+
+[Rozwiązanie dla tego zadania (0/1)](https://tomasz-em.github.io/DOM-i-jQuery/dom-6-kalkulator-walut/index.html)
+|
+[Plik JS z poleceniem i rozwiązaniem](https://tomasz-em.github.io/DOM-i-jQuery/dom-6-kalkulator-walut/currency-calculator.js)
+
+---
+### 7. Kalkulator (folder `dom-7-kalkulator`)
+Stwórz kalkulator podstawowych działań matematycznych; musi mieć przycisk `Clear`, przyciski reprezentujące cyfry od `0` do `9`, przyciski działań `+`, `-`, `✖`, `➗` oraz `=`do wykonania zadanych obliczeń; \
+spróbuj oprogramować poniższe przypadki użycia: \
+`15 + 25 = → 40` \
+`10 + 5 = ✖ 2 = → 30`
+
+![Komponent kalkulatora podstawowych działań matematycznych](https://tomasz-em.github.io/DOM-i-jQuery/polecenia-dom--obrazy/dom-6-kalkulator-walut.jpg "Komponent kalkulatora podstawowych działań matematycznych")
+
+[Rozwiązanie dla tego zadania (0/1)](https://tomasz-em.github.io/DOM-i-jQuery/dom-7-kalkulator/index.html)
+|
+[Plik JS z poleceniem i rozwiązaniem](https://tomasz-em.github.io/DOM-i-jQuery/dom-7-kalkulator/calculator.js)
 
 ___
+
+# jQuery - lista zadań
 
 ## Wyszukiwanie elementów - lista nr 1 (folder `1-wyszukiwanie-elementow`) 
 
