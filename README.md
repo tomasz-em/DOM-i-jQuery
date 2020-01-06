@@ -100,7 +100,7 @@ spróbuj oprogramować poniższe przypadki użycia: \
 `15 + 25 = → 40` \
 `10 + 5 = ✖ 2 = → 30`
 
-![Komponent kalkulatora podstawowych działań matematycznych](https://tomasz-em.github.io/DOM-i-jQuery/polecenia-dom--obrazy/dom-6-kalkulator-walut.jpg "Komponent kalkulatora podstawowych działań matematycznych")
+![Komponent kalkulatora podstawowych działań matematycznych](https://tomasz-em.github.io/DOM-i-jQuery/polecenia-dom--obrazy/dom-7-kalkulator.jpg "Komponent kalkulatora podstawowych działań matematycznych")
 
 [Rozwiązanie dla tego zadania (0/1)](https://tomasz-em.github.io/DOM-i-jQuery/dom-7-kalkulator/index.html)
 |
