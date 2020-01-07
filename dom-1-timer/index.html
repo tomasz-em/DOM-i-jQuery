@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer (#1 z zadań dodatkowych DOM)</title>
+    <link rel="stylesheet" href="timer.css">
+</head>
+<body>
+    <div class="timer-container">
+        <h2>Timer</h2>
+        <form id="timer-form" name="timer-form" action="#">
+            <div class="button-container">
+                <div>
+                    <label for="minutes">Minuty</label>
+                    <input type="text" id="minutes" name="minutes" maxlength="3" value="0" />
+                </div>
+                <div>
+                    <label for="seconds">Sekundy</label>
+                    <input type="text" id="seconds" name="seconds" maxlength="2" value="00" />
+                </div>
+                <div>
+                    <input type="button" id="timer-reset" name="timer-reset" value="Reset" />
+                    <input type="submit" id="timer-start" name="timer-start" value="Start" />
+                </div>
+            </div>
+        </form>
+
+    </div>
+
+<script src="timer.js"></script>
+
+</body>
+</html>

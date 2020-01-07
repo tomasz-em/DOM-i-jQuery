@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5em;
+}
+
+h2 {
+    margin: 0;
+    /* margin-bottom: 0.5em; */
+    text-align: left;
+}
+
+input {
+    font-size: 1.1em;
+    padding: 0.1em 0.5em;
+    transition: background-color 0.2s;
+}
+
+input[type="text"] {
+    width: 2em;
+    text-align: center;
+    border: 2px solid #aaa;
+}
+
+input[type="submit"],
+input[type="button"]
+{
+    margin-top: 0.2em;
+    padding: 0.1em 1.5em;
+    cursor: pointer;
+    background-color: #f9f9f9;
+    border: 2px solid #aaa;
+    border-radius: 0.25em;
+    width: 175px;
+
+}
+
+input[type="submit"] {
+    font-weight: bold;
+}
+
+input:hover:not(:disabled),
+input:focus:not(:disabled)
+{
+    background-color: #cfc;
+}
+
+input:disabled,
+input[disabled]
+{
+    cursor: not-allowed;
+}
+/* input[type="submit"]:hover,
+input[type="button"]:hover,
+input[type="submit"]:focus,
+input[type="button"]:focus
+{
+    background-color: #ccc;
+}
+ */
+
+label {
+    font-size: 0.8em;
+}
+
+.timer-container {
+    max-width: 400px;
+    margin: 2em auto;
+    padding: 0.8em;
+    text-align: center;
+    background-color: #f2f2f2;
+    border: 2px solid #aaa;
+}
+
+.button-container {
+    display: flex;
+}
+
+.button-container > div {
+    align-self: flex-end;
+}
+
+
+.button-container > div:last-child {
+    flex-basis: 200px;
+}
