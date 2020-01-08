@@ -40,8 +40,8 @@ li > button {
 }
 
 h2 > span {
-    font-size: 0.7em;
-    color: #333;
+    font-size: 0.8em;
+    color: white;
     background-color: initial;
     display: initial;
 }
@@ -50,21 +50,74 @@ h2 > span {
     padding: 1em;
     background-color: #ccc;
     border: 2px dotted #666;
-    max-width: 30%;
+    min-width: 30%;
+    max-width: 50%;
+}
+
+.panel.nowy,
+.panel.najnowszy
+{
+    background-color: #ba85eb;
+    overflow: hidden;
+        transition: padding-bottom 0.5s 0.2s;   /*  <-- to nie zadziała poprzez elementy podległe, one nie zmienią wprost parametrów rodzica */ 
+}
+
+.panel.nowy:hover,
+.panel.najnowszy:hover
+{           /* zyskujemy płynność  animacji, zamiast skokowej zmiany wysokości rodzica  */
+            /*  ... choć i tak NIE WPROST: dziecko NIEMAL NATYCHMIASTOWO inicjuje ZMIANĘ WYSOKOŚCI rodzica, poprzez swój rozmiar  
+                ... i do tego rozmiaru jest dodawane/odejmowane wartość dolnego wypełnienia!!! */
+
+    padding-bottom: 0;  /* ta wartość jest odejmowana od rozmiaru elementu, ale też o TĘ SAMĄ WYSOKOŚĆ jego dziecku ZMNIEJSZA się margin-bottom
+                ... w zasadzie ZWIĘKSZA SIĘ tam z -1 na 0 (bezwzględnie),
+                ... co skutkuje ZWIĘKSZENIEM odstępu (opuszczeniu w pionie, wcześniej podniesionego o tę wartość w górę) */
+}
+
+
+.panel:last-of-type {
+    margin-bottom: 10em;
 }
 
 .panel > div {
-    margin: -1em;
+    margin: -1em;   /* ten trik nie pozoli ładnie animować rozmiaru rodzica.... */
+        transition: opacity 0.4s 0.1s, transform 0.35s 0.1s, margin-bottom 0.5s, padding-right 0.4s 0.2s;     /* przeniesiono tutaj jako jedną definicję dla pokazywania i ukrywania zawartości podrzędnego elementu */
+        overflow: hidden;    /* ukrywanie nadmiarowej zawartości podległego elementu, użyteczne przy "ukrywaniu" */
 }
 
-.panel:last-of-type {
-    margin-bottom: 10em;;
+.panel > .niewidzialne,
+.panel.nowy > .niewidzialne,    /* dwie klasy jako stan początkowy dla elementu, dwa stany dziecka + wpływ wsteczny na rodzica */
+.panel.najnowszy > div
+{
+    background-color: #c0a3db;
+    border: 1px solid #b38dd6;
+    opacity: 0;
+    height: 0;
+    transform: scale(0);
+        /* overflow: hidden; */
+        margin-bottom: -1em;    /* poczatkowa/domyślna wartość marginesu */
+        padding-right: 75%;
+        /* transition: opacity 0.4s 0.1s, transform 0.3s 0.1s, height 0.3s 0.1s, padding-right 0.1s, margin-right 0.15s 0.1s; */  /* !!! */
+}
+
+.panel.nowy > div,  /* stan po odjęciu klasy, gdy "mouseenter" */
+.panel.najnowszy:hover > div
+{
+    opacity: 1;
+    height: auto;
+    transform: scale(1);
+        /* overflow: visible; */
+        margin-bottom: 0;   /* element zyskuje wysokość/traci na swej wysokości o +1em */
+        padding-right: 10px;
+        /* transition: opacity 0.1s, height 0.1s; */
+        /* transition: opacity 0.2s 0.1s, transform 0.2s 0.1s, height 0.3s 0.1s, padding-right 0.2s, margin-right 0.25s 0.1s; */ /* ?!?! */
 }
 
 .ukryte {
     display: none;
 }
-
-.tlo-jasnoszare {
-    background-color: #ddd;
-}
+    /* poniższe reguły niepotrzebne, przeniesione do definicji w bardziej elementach */
+/* .niewidzialne {
+    opacity: 0;
+    height: 0;
+    transition
+} */

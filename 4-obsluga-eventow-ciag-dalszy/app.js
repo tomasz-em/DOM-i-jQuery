@@ -7,17 +7,18 @@ Ustaw na elemencie event, który po najechaniu na ten div pokaże ukryty tekst.
 */
 
     // bez kombinowania z bezwzględnym pozycjonowaniem i odczytywaniem pozycji kursora
-$tresciWstepnieUkryte = $('<div>', { class: 'ukryte' });   // nowa klasa, domyślnie niewidoczny element od razu
-$tresciWstepnieUkryte.html('<h3>... nic z tego nie będzie! Nie podam jak trafić w Tajemnicze Miejsce!</h3><p>No dobra - mała podpowiedź, że trzeba iść 127 kroków prosto od Złamanego Drzewa w kierunku Wyschniętej Studni ;)</p>')
-$panel = $('<div>', { class: 'panel' }).html('<h2>Mapa do skarbu jest ukryta w ... <span>(wskaż mnie kursorem) [mouseenter i mouseleave]</span></h3>');
-$elementWczesniejszy = $('.people');
+    var $tresciWstepnieUkryte = $('<div>', { class: 'ukryte' });   // nowa klasa, domyślnie niewidoczny element od razu
+    var $panel = $('<div>', { class: 'panel' }).html('<h2>Mapa do skarbu jest ukryta w ... <span>(wskaż mnie kursorem) <br />[mouseenter i mouseleave + show()/hide()]</span></h3>');
+    var $elementWczesniejszy = $('.people');
+
+    $tresciWstepnieUkryte.html('<h3>... nic z tego nie będzie! Nie podam jak trafić w Tajemnicze Miejsce!</h3><p>No dobra - mała podpowiedź, że trzeba iść 127 kroków prosto od Złamanego Drzewa w kierunku Wyschniętej Studni ;)</p>')
 
     // budowanie całości elementów krok po kroku (mnóstwo wariantów dla kolejności, ważne by na końcu do istniejącego elementu strony dodać jeden element z zawartością) 
     $( $tresciWstepnieUkryte ).appendTo( $panel );
     $( $elementWczesniejszy ).after( $panel );
     $panel.on('mouseenter', function(evt) {    // zdarzenie 'MOUSEENTER' na WEJŚCIE kursora w  obszar elementu rodzica
 
-        $tresciWstepnieUkryte.show(100);
+        $tresciWstepnieUkryte.show(200);
         console.log( "pokazuję się", $tresciWstepnieUkryte );
         // evt.stopPropagation();   // teraz to niczemu nie służy (podejrzenie wielkorotności wywoływania zdarzeń)
 
@@ -32,29 +33,80 @@ $elementWczesniejszy = $('.people');
     });
 
         // naprostsza definicja zdarzenia z zabraniem kursora myszy
-    $panel.on('mouseleave', function(e) {    // zdarzenie 'MOUSELEAVE' na WYJŚCIE kursora w  obszar elementu rodzica (+ obszar dzicka się wlicza)
-        $tresciWstepnieUkryte.hide(100); 
+    $panel.on('mouseleave', function(e) {    // zdarzenie 'MOUSELEAVE' na WYJŚCIE kursora w obszar elementu rodzica (+ obszar dziecka się wlicza)
+        $tresciWstepnieUkryte.hide(200); 
         console.log( "ukrywam się", $tresciWstepnieUkryte );
         // e.stopPropagation();
     });
 
 // ---- to samo, ale poprzez funkcję dla zdarzenia HOVER() ----
 
-    $tresciWstepnieUkryte2 = $('<div>', { class: 'ukryte' });   // nowa klasa, domyślnie niewidoczny element od razu
+    var $tresciWstepnieUkryte2 = $('<div>', { class: 'ukryte' });   // nowa klasa, domyślnie niewidoczny element od razu
+    var $panel2 = $('<div>', { class: 'panel' }).html('<h2>Tej mapy nie odnajdziesz w ... <span>(wskaż mnie kursorem) <br />[hover() + show()/hide()]</span></h3>');
+
     $tresciWstepnieUkryte2.html('<h3>... w Ruinach Zamczyska ani na wyspie Bagnistego Jeziora, ani w Żelaznej Jaskini</h3><p>Nic więcej z siebie nie wyduszę, ni grama pomocy!</p>')
-    $panel2 = $('<div>', { class: 'panel' }).html('<h2>Tej mapy nie odnajdziesz w ... <span>(wskaż mnie kursorem) [hover()]</span></23>');
-    // $elementWczesniejszy = $('.people');
+
+// $elementWczesniejszy = $('.people');
     $( $tresciWstepnieUkryte2 ).appendTo( $panel2 );
     $( $panel ).after( $panel2 );   // wstaw drugi "tymczasowy" panel, za już wygenerowanym
 
     $panel2.hover(function () {     // jedna definicja, ale dwa stany obejmuje (PIERWSZY dla kursora wchdzącego w element, DRUGI gdy opuszcza go)
-        $tresciWstepnieUkryte2.show(100);
+        $tresciWstepnieUkryte2.show(200);
         console.log( "HOVER (1) pokazuję się", $tresciWstepnieUkryte2 );
     }, 
     function() {
-        $tresciWstepnieUkryte2.hide(100); 
+        $tresciWstepnieUkryte2.hide(200); 
         console.log( "HOVER (2) ukrywam się", $tresciWstepnieUkryte2 );
     });
+
+// ---- JESZCZE RAZ to samo, ale poprzez przypisywanie odpowiedniej klasy (obsługa np. poprzez kumulacyjne zdarzenie "hover", ale to bez znaczenia)  ----
+
+    var $panel3 = $('<div>', { class: 'panel nowy' }).html('<h2>Jestem z przyszłości ... <span>(wskaż mnie kursorem) <br />[hover() + addClass()/removeClass()]</span></h3>');
+    var $tresciWstepnieUkryte3 = $('<div>', { class: 'niewidzialne' });   // jeszcze nowsza klasa, domyślnie niewidoczny element od razu
+    $tresciWstepnieUkryte3.html('<h3>... skarb wykopałem i sprzedałem, resztki oddałem do lokalnego muzeum.</h3><p>I tak było warto. Do tej pory żyję z procentów.</p>')
+    // $elementWczesniejszy = $('.people');
+    $( $tresciWstepnieUkryte3 ).appendTo( $panel3 );
+    $( $panel2 ).after( $panel3 );   // wstaw drugi "tymczasowy" panel, za już wygenerowanym
+
+    $panel3.hover(function () {     // jedna definicja, ale dwa stany obejmuje (PIERWSZY dla kursora wchdzącego w element, DRUGI gdy opuszcza go)
+        $tresciWstepnieUkryte3.removeClass('niewidzialne'); // addClass('ukazane');
+        console.log( "HOVER (A) pokazuję się", $tresciWstepnieUkryte3 );
+    }, 
+    function() {
+        $tresciWstepnieUkryte3.addClass('niewidzialne');  //.removeClass('ukazane'); 
+        console.log( "HOVER (B) ukrywam się", $tresciWstepnieUkryte3 );
+    });
+
+    // ---- JESZCZE JEDEN RAZ to samo, ale JS tylko wstawia elementy, a ich obsługa TYKLO poprzez CSS (też .hover())  ----
+
+    var $panel4 = $('<div>', { class: 'panel najnowszy' }).html('<h2>Jestem z najnowszej wersji przyszłości ... <span>(wskaż mnie kursorem) <br />[tylko CSS]</span></h3>');
+    var $tresciWstepnieUkryte4 = $('<div>', { class: 'niewidzialne' });   // jeszcze nowsza klasa, domyślnie niewidoczny element od razu
+    $tresciWstepnieUkryte4.html('<h3>... gdzie nie potrzebuję dolarów, złota, ani platyny. <strong><br />Pan i Twórca JavaScript nie kontroluje już mnie</strong>! '
+        + 'To CCS jest Mym Bogiem, <strong>ON</strong> mnie napędza!</h3><p>CSS RULEZ!!! CSS RULEZ!!! CSS RULEZ!!! CSS RULEZ!!! CSS RULEZ!!! CSS RULEZ!!! CSS RULEZ!!!</p>');
+    // $elementWczesniejszy = $('.people');
+    $( $tresciWstepnieUkryte4 ).appendTo( $panel4 );
+    $( $panel3 ).after( $panel4 );   // wstaw drugi "tymczasowy" panel, za już wygenerowanym
+
+    /*  (+): obsługa poprzez JS jest niepotrzebna, jeśli zdefiniowaliśmy właściwe klasy w CSS:
+    + ".najnowszy" dla elementu rodzica, powiązania z wyświetlania elementu dziecka, zależnie od stanu kursora nad elementem
+    + ta klasa nie jest potrzebna, ale tutaj już istnieją obok umieszczone i zdefiniowane zasadami "podobne" elementy
+    + wystarczy definicja dwóch stanów wybranych atrybutów dziecka, względem rodzica -- stanu podstawowego i zmienionego   
+    + animowanie poprzez zmianę wyskości oraz widoczności dziecka + ewentualnie dodatkowe atrybuty CSS
+    + tu użyty wcześniej trik z poszerzaniem elementu dziecka działa na niekorzyść dla całej animacji pokazywania wielkości rodzica
+    + też użycie "przejść", jako uproszczonego wariantu animacji, który sprawnie obsługuje wszelaką dwustanowoaść pomiędzy wartościami atrybutów  
+    + (+ #2): nie ma migotania elementu potomnego typu "pojawiam" się i znikam" dla pewnych obszarów, gdy wpadnie tam kursor 
+
+    ale (-): 
+    - jest złożoność podejścia i nie otrzymujemy IDENTYCZNEGO zachowania, jak wariant z jQuery i show()/hide()
+    - użytymi stylami nie można wprost zmienić rozmiaru rodzica o niepełny rozmiar dziecka
+    - użyty niechcący "margin-bottom" standardowo pozwala ukrywać wielkość elmentu podległego, co ma woływ na zmiany wielości rodzica
+    - tu rodzic dostaje od razu swój nowy rozmiar, powiększony o PEŁNĄ WYSOKOŚĆ dziecka
+    - wpływ na stylowanie elementów, nie można użyć wszystkich dostępnych atrybutów (albo ruszyć tych, co są jakoś określone już)!
+    - trochę ciężko zapanować na wartościami atrybutów elementów
+
+    */ 
+
+
 
 /*  Zadanie 2
 Znajdź w pliku index.html element o klasie people. Wykonaj w niej następujące czynności:
@@ -206,4 +258,4 @@ var $przyciskDodaj = $('.people').find('input[type="submit"]');
 
 
 
-});
+});     // jQuery-ready-END
