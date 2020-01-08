@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Newsletter (#2 z zadań dodatkowych DOM)</title>
+    <link rel="stylesheet" href="newsletter.css">
+</head>
+<body>
+    <div class="subscription-container">
+        <div>
+            <div class="text">
+                <h2>Arcyciekawy Newsletter</h2>
+                <p><span>Zapisz się</span>, aby otrzymywać powiadomienia o <span>najnowszych</span>, <span>najlepszych</span>, <span>najciekawszych</span> i <span>najtrafniej wyselekcjonowanych</span> 
+                    treści z przepastnego ogromu internetowych informacji.<br />
+                    <span>Tych treści</span> nie znajdziesz nigdzie indziej tak szybko, jak w <span>naszym serwisie</span>.</p>
+            </div>
+            <div class="site-logo">
+                <img src="tory-155-180x180.jpg" alt="losowy obrazek jako logo" />
+                <!-- src="https://picsum.photos/180"
+                    cz-b budynek z NY: https://i.picsum.photos/id/939/180/180.jpg 
+                    lub architektura w pasującym kolorze: https://i.picsum.photos/id/979/180/180.jpg
+                    lub tory kolejowe: https://i.picsum.photos/id/155/180/180.jpg
+                    lub inne z randomowym logiem
+                -->
+            </div>
+        </div>
+        <div>
+            <form id="subscription-form" name="subscription-form" action="#">
+                <input type="text" id="any-name" name="any-name" placeholder="Imię / Ksywka" />
+                <input type="text" id="your-email" name="your-email" placeholder="twój@email" />
+                <input type="submit" id="submit-subscr" name="submit-subscr" value="Zapisz się" />
+            </form>
+        </div>
+
+    </div>
+
+<script src="newsletter.js"></script>
+
+</body>
+</html>
