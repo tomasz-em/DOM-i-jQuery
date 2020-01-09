@@ -1,0 +1,96 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2em;
+}
+
+h2 {
+    margin: 0;
+    text-align: left;
+}
+
+p {
+    text-align: left;
+    margin: 0.5em auto;
+}
+
+input {
+    font-size: 1.1em;
+    padding: 0.1em 0.5em;
+    transition: background-color 0.2s;
+}
+
+input[type="text"] {
+    width: 8em;
+    text-align: right;
+    border: 2px solid #aaa;
+}
+
+input[type="image"] {
+    margin: 0.2em 0.4em;
+    margin-bottom: -6px;
+    padding: 0.2em 1em;
+    cursor: pointer;
+        /* width: 65px; */
+    background-color: #88f;
+    border: 2px solid #777;
+    border-radius: 0.25em;
+    transition: background-color 0.2s, transform 0.3s; /* bez zabawy z animacjami... ale DORZUCONO skopiowaną regułę na zmianę koloru tła z <input> */
+}
+
+input:hover:not(:disabled),
+input:focus:not(:disabled)
+{
+    background-color: #bbf;
+    border-color: #777;
+}
+
+input[type="image"]:hover,
+input[type="image"]:focus
+{
+    /* background: url('arrow-transparent-png-14-light.png') 50% 50% no-repeat; */  /* próby podmianki innego obrazka tła, ale tło jest POD obrazkiem!! */
+    background-color: #bbf;
+    border-color: #666;
+}
+
+input:disabled,
+input[disabled]
+{
+    cursor: not-allowed;
+}
+
+label {
+    font-size: 0.8em;
+}
+
+.temperature-converter-container {
+    max-width: 550px;
+    margin: 2em auto;
+    padding: 0.8em;
+    text-align: center;
+    background-color: #f5f5f5;
+    border: 2px solid #aaa;
+}
+
+.button-container {
+    display: flex;
+    align-items: flex-end;
+    margin-top: 1em;
+}
+
+.button-container > div {
+    align-self: flex-end;
+}
+
+.animate-rotation-180 {
+    /* animation: rotate-y-180 0.3s;
+    animation-fill-mode: both; */
+
+    transform: rotateY(180deg);     /* prostsze podejście, bez tworzneia dwóch klas i animacji oraz zabawy z jej trybami i cofaniem/nadawaniem zmian */
+}
+
+
+/* @keyframes rotate-y-180 {
+    100% { 
+        transform: rotateY(180deg);
+    }
+} */

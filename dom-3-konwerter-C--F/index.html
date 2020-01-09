@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konwerter temperatur (#3 z zadań dodatkowych DOM)</title>
+    <link rel="stylesheet" href="temp-converter.css">
+</head>
+<body>
+    
+    <div class="temperature-converter-container">
+        <h2>Konwerter temperatur</h2>
+        <p>Przelicza wynik na bieżąco, podczas wpisywania wartości.</p>
+        <div class="button-container">
+            <div>
+                <label for="celsius">stopnie Celsjusza</label>
+                <input type="text" id="celsius" name="celsius" maxlength="12" value="0" placeholder="Wpisz wartość" />
+            </div>
+            <div>
+                <input type="image" id="selector" name="selector" class="now-celsius" src="arrow-transparent-png-14-dark.png" alt="Zamień jednostki" title="Zamień jednostki" />
+                <!-- strzałka: http://clipart-library.com/clip-art/arrow-gif-transparent-8.htm
+                    podwójna: http://clipart-library.com/clip-art/arrow-transparent-png-14.htm
+                    obrotowa: http://clipart-library.com/clip-art/transparent-arrow-clip-art-5.htm
+                -->
+            </div>
+            <div>
+                <label for="fahrenheit">stopnie Fahrenheita</label>
+                <input type="text" id="fahrenheit" name="fahrenheit" disabled maxlength="12" placeholder="Wpisz wartość" />
+            </div>
+        </div>
+    </div>
+
+<script src="temp-converter.js"></script>
+
+</body>
+</html>
