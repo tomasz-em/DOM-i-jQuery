@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rejestracja użytkownika (#4 z zadań dodatkowych DOM)</title>
+    <link rel="stylesheet" href="register-me.css">
+</head>
+<body>
+    <div class="registration-container">
+        <div class="site-logo">
+            <img src="tourist-177-150x150.jpg" alt="losowy obrazek jako logo" />
+            <!-- src="https://picsum.photos/180" -- domyślnie generowane jako losowe
+                turysta i góry: https://i.picsum.photos/id/177/150/150.jpg,
+                wijąca się droga: https://i.picsum.photos/id/387/150/150.jpg,
+                herbata i ręka: https://i.picsum.photos/id/326/150/150.jpg,
+                chwast w górach: https://i.picsum.photos/id/118/150/150.jpg,
+                zachód i drewniane molo: https://i.picsum.photos/id/867/150/150.jpg,
+                tory nisko: https://i.picsum.photos/id/204/150/150.jpg,
+                człek i wodospad: https://i.picsum.photos/id/1035/150/150.jpg,
+                auto i zachód: https://i.picsum.photos/id/551/150/150.jpg,
+
+            -->
+        </div>
+
+        <div class="text">
+                <h2>Turystyka z Obiektywem</h2>
+                <h5>Miejsce spotkań pstrykających podróżników</h5>
+                <p>Dołącz do społeczności wypełniając poniższy formularz</p>
+        </div>
+
+        <form id="registration-form" name="registration-form" action="#">
+            <div>
+                <input type="text" id="your-email" name="your-email" placeholder="Twój@email" />
+            </div>
+            <div class="password">
+                <input type="password" id="your-pass" name="your-pass" placeholder="Hasło" />
+                <p title="użyj wielu grup znaków: małe i wielkie litery, cyfry oraz znaki specjalne">Hasło wymaga co najmniej <strong>sześciu</strong> znaków, zalecana <strong>różnorodność</strong> grup znaków.</p>
+            </div>
+            <div class="password-strength">
+                <p>siła Twojego hasła:</p>
+                <ul>
+                    <li class="weak"></li>
+                    <li class="average"></li>
+                    <li class="strong"></li>    
+                </ul> 
+            </div>
+            <div>
+                <input type="submit" id="register-me" name="register-me" value="Zapisz się" />
+            </div>
+        </form>
+   
+    </div>
+
+<script src="register-me.js"></script>
+
+</body>
+</html>
