@@ -46,8 +46,8 @@ var email = '',
 
 emailInput.value = '';  // zerowanie wpisanych wartości na starcie
 passInput.value = '';
+passInput.setAttribute('maxlength', passwordQuality.maxLength);     // na starcie  ograniczamy rozmiar wpisywanych danych do pola hasła 
 submitBtn.setAttribute('disabled', true);   // oraz na starcie blokowanie wysłania formularza poprzez click.. co nie znaczy, ze [enetrem] lub [spacją] nie da się wysłać ;)
-
 
     // ======  ZDARZENIA  ======
 
@@ -57,6 +57,7 @@ emailInput.addEventListener('input', function( evt ) {
 
 passInput.addEventListener('input', function( evt ) {
     checkInputLength( evt.target );   // jak długi jest wpisany tekst
+    fixPasswordFieldMaxLength( evt.target ); 
     evaluatePassword( evt.target );     // <-- tu druga funkcja do sprawdzania jakości hasła, BEZ WYŚWIETLANIA jego stanu w formie graficznej 
         // kolejne też potrzebne, czy w poprzedniej budować rozbudowaną logikę? 
     turnOnLamp( passwordQuality.passwordStage );    // tu WIZUALIZACJA, przeniesione z funkcji powyższej, by "bardziej czyste funkcje były
@@ -182,23 +183,28 @@ function enableRefreshByRedirectionEvent() {
         }
 }
 
-
 function checkInputLength( eventElem ) {    // ustawianie bądź zerowanie wskaźnika uzupełnienia elementu treścią
                                 // ...operuje na wyższych w hierarchii zmiennych (tu odwołanie do dwóch globalnych) 
     if ( eventElem.id == elemEmailId ) {     // pole emaila/loginu
-        console.log("Pole '" + eventElem.id + "' zajmuje " + eventElem.value.length + " znaków (zawartość: '" + eventElem.value + "').");
+    console.log("Pole '" + eventElem.id + "' zajmuje " + eventElem.value.length + " znaków (zawartość: '" + eventElem.value + "').");
         if ( eventElem.value.length > 0 ) formRequiredFilledFields.emailField = true;
         else  formRequiredFilledFields.emailField = false;
     }
 
     if ( eventElem.id == elemPassId ) {      // pole hasła
-        console.log("Pole '" + eventElem.id + "' zajmuje " + eventElem.value.length + " znaków (zawartość: '" + eventElem.value + "').");
+    console.log("Pole '" + eventElem.id + "' zajmuje " + eventElem.value.length + " znaków (zawartość: '" + eventElem.value + "').");
         if ( eventElem.value.length > 0 ) formRequiredFilledFields.passwordField = true;
         else  formRequiredFilledFields.passwordField = false;
     }
             // !!! poniżej od razu kolejny etap weryfikacji: globalna_zmienna_statusowa się ustawia/zeruje, gdy uzupełnimy znakiem drugie z pól formularza 
     submitDisabled = isDisabledStateOfSubmitBtn();   // sprawdź, czy przycisk submit może być aktywawany/de~ i ustal mu właściwy atrybut
             // wywołanie modyfikuje też zmienną statusową, która blokuje lub nie zdarzenie "submit" (z klawiatury, będąc w dowolnym z pól formularza)
+}
+
+function fixPasswordFieldMaxLength( passwordInputElem ) {
+var passwordInputMaxLength = Number( passwordInputElem.getAttribute('maxlength') ) || 1;    // odczytana wartość lub jakaś wartość mniejsza od zadanego maksimum 
+    // warunkowe nadanie atrybutu "maxlength" z odpowiednią wartością, gdyby został usunięty w DOMie (w narzędziach administracyjnych przez usera) 
+    if ( ( !passwordInputElem.hasAttribute('maxlength') ) || ( passwordInputMaxLength < passwordQuality.maxLength ) ) passwordInputElem.setAttribute('maxlength', passwordQuality.maxLength);
 }
 
 function isDisabledStateOfSubmitBtn() { // tylko odniesienie graficzne oraz ewentualna zmiana stanu przycisku (nie całej formy)
@@ -280,11 +286,6 @@ passwordQuality.specialCharLetter = testForSpecialChar( passwordText );
             passwordQuality.passwordStage = 3;      // !!!
         }   // czy hasło zawiera jakieś małe/duże/ litery, ma zmieniony zakres i jest w "globalnym" zakresie
 
- 
-/*         if ( true ) {   }   // czy hasło zawiera jakieś wielkie litery
-        if ( true ) {   }   // czy są obecne cyfry
-        if ( true ) {   }   // a jakieś zanki specjalne
- */
     // turnOnLamp( passwordQuality.passwordStage );    // NIE-"czyty kod", lepiej przenieść wizualizację do osobnej funkcji... czyli uruchomić jawnie po określeniu stanów 
     }
     else {  // gaszenie wszystkich "kontrolek"
@@ -313,7 +314,7 @@ function turnOnLamp( status ) {
             break;
 
         case 3:
-                    // tu nic nie gasimy, tylko zapalamy wszystkie od razu
+                    // tu nic nie gasimy, tylko zapalamy wszystkie wskaźniki od razu
                 weakStrengthNotifierLamp.classList.add('ok');   // ...mimo wszystko dwa pierwsze elementy powinny zawierać już tą klasę  
                 averageStrengthNotifierLamp.classList.add('ok');
                 strongStrengthNotifierLamp.classList.add('ok'); // zasadnicze dodanie

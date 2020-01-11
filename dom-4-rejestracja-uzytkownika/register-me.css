@@ -36,7 +36,6 @@ h5 {
 p {
     text-align: justify;
     /* margin-top: 1em; */
-
 }
 
 input {
@@ -88,7 +87,6 @@ input[disabled]
     color: #999;
     border-color: #aaa;
     cursor: not-allowed;
-
 }
 
 .registration-container {
@@ -139,26 +137,32 @@ input[disabled]
 
 .password-strength {
     display: inline-block;
+    text-align: center;
 }
 
 .password-strength > p {
     display: inline-block;
+    margin-bottom: 0;
 }
 
 .password-strength > ul {
     list-style-type: none;
     display: inline-block;
+    vertical-align: middle; /* równe ułożenie w pionie, też względem tekstu sąsiedniego paragrafu */
     line-height: 0.7em;  /* bez tej wartości elementy dostają jakiegoś nienaturalnego odstępu pod sobą... niewielki, ale jednak o 30% większy niż pozostałe trzy (i równe) strony  */
     padding: 0.5em;
+    padding-right: 0;   /* usunięcie niepotrzebnego odstępu, skoro element nie posiada innego tła i obrysu  */
         /* border: 2px solid #aaa; */
         /* background-color: #ddd; */
     margin: 0;
+    margin-left: 0.5em; /* korekta na wyśrodkowanie i "wyjustowanie" elementów w DIVie, by mieć szerokość i skojarzenie z poprzednim tekstem, też odnośnie hasła  */
 }
 
 .password-strength li {
     display: inline-block;
-    width: 3em;
+    width: 3.5em;
     padding: 0.5em;
+    margin: 0.15em;
     border: 2px solid #666;
     background-color: #ccc;
 }
