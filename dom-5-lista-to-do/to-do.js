@@ -4,22 +4,7 @@ musi listować zapisane zadania do wykonania wraz z inputem typu checkbox, któr
 Ponadto, checkbox “show completed” ma powodować wylistowanie wszystkich wykonanych zadań.
 */
 
-var existingToDos = [
-        { name: 'Zbędny zapychacz PIERWSZEGO miejsca ;)', done: true },
-        { name: 'TEST IDENTYCZNEJ ZAWARTOŚCI', done: true },
-        { name: 'TEST IDENTYCZNEJ ZAWARTOŚCI', done: true },
-        { name: 'TEST IDENTYCZNEJ ZAWARTOŚCI', done: false },
-        { name: 'TEST IDENTYCZNEJ ZAWARTOŚCI', done: true },
-        { name: 'Spożywczak: chleb, nabiał, drożdże, sałata', done: false },
-        { name: 'Stomatolog w poniedziałek (19:30!)', done: false },
-        { name: 'Prezent dla Maćka na urodziny :)', done: true },
-        { name: 'Ukoczyć kurs GITa', done: false },
-        { name: 'Wykonać projekt JS z rezerwacją miejsca w samolocie', done: true },
-        { name: 'Kupić bilety do kina (seans na sobotę)', done: true },
-        { name: 'Przepalona żarówka w lampce pokojowej, wybrać ciepłe światło', done: false },
-        { name: 'TEST IDENTYCZNEJ ZAWARTOŚCI', done: true },
-        { name: 'Sprawdzić auto, skonsultować pracę silnika z mechanikiem', done: false }
-    ],
+var existingToDos = [], // pusta lista na starcie
     displayingListMode = ['all', 'undone', 'done'], // lista trybów przeglądania listy
     currentDisplayingListMode = displayingListMode[0],  // "all" jako domyślny sposób; zmienialny przy naciśnięciu przycisku w dolnej belce
     notificationElem,   // nie ma potrzeby tworzyć zmiennej, kosztowniejsze i prostsze jest każdorazowe zapytanie o ten element w DOMie
@@ -33,8 +18,9 @@ var existingToDos = [
     deleteAllDoneBtn = document.getElementById('delete-completed'),
     // listTypeSelectorRadio = document.querySelectorAll('.bottom-menu input[type="radio"]');  // to nie ta kolekcja
     listTypeSelectorRadio = document.forms['selected-view'].elements['show-completed'], //']; selectingView.elements.showCompleted;  -- KOLEKCJA HTMLa, NIE_TABLICA! 
-    newUnwantedForm = document.getElementById('selected-view');
     //listTypeSelectorRadio = document.forms.selectingView.elements.showCompleted;
+    newUnwantedForm = document.getElementById('selected-view'),
+    loadTestDataBtn = document.getElementsByClassName('load-test-data')[0]; // 
     
 
     // ======  STARTOWE DZIAŁANIE  ======
@@ -67,6 +53,20 @@ deleteAllDoneBtn.addEventListener('click', function( evt ) {
     deleteAllDone( evt ); 
 }, false);   // !!! dla wskazanego elementu a nie "=" !!!
 
+newUnwantedForm.addEventListener('submit', function( evt ) {
+    var elemName = evt.target.tagName;    
+        evt.preventDefault();   // [!] to broni przed przesłaniem tej formy?!, kiedy klikniemy w "Usuń ukończone" ... czyżby NIEJAWNY <input type="submit"> w miejsce istniejącego <button>-a?!?!
+        evt.stopPropagation();
+        console.log("PRZESYŁANIE NIECHCIANEGO FORMULARZA zainicjowane przez...", elemName);
+    
+        // błąd tylko w IE i starych przeglądarkach
+        // console.log("SUBMIT-CHANGE (OBJ):", evt);
+        // selectTypeOfToDos( evt );   // co samo co przypisano w zmianie wartości - zdarzenie "change"
+            // displayWholeToDoList( currentDisplayingListMode );   // to niepotrzebne, skoro wysłanie formy spowoduje automatyczne wyświetlenie 
+            //... tego samego widoku (tylko jego odświeżenie; niepotrzebne?) 
+    }, false);
+
+    // 3 x kolejno po wszystkich przyciskach "radio" 
 for (var i = 0; i < listTypeSelectorRadio.length; i++) {
     listTypeSelectorRadio[i].addEventListener('change', function( eventObj ) {  // zmiana wyboru zaznaczenia 
         selectTypeOfToDos( eventObj );   // tu cały obiekt zdarzenia wskakuje, bez zmniejszania zakresu 
@@ -84,22 +84,24 @@ for (var i = 0; i < listTypeSelectorRadio.length; i++) {
     radioInput.addEventListener('change', selectTypeOfToDos, false);   
 });  */
 
-newUnwantedForm.addEventListener('submit', function( evt ) {
-var elemName = evt.target.tagName;    
-    evt.preventDefault();   // [!] to broni przed przesłaniem tej formy?!, kiedy klikniemy w "Usuń ukończone" ... czyżby NIEJAWNY <input type="submit"> w miejsce istniejącego <button>-a?!?!
-    evt.stopPropagation();
-    console.log("PRZESYŁANIE NIECHCIANEGO FORMULARZA zainicjowane przez...", elemName);
+loadTestDataBtn.addEventListener('click', function( evt ) {     
 
-    // błąd tylko w IE i starych przeglądarkach
-    // console.log("SUBMIT-CHANGE (OBJ):", evt);
-    // selectTypeOfToDos( evt );   // co samo co przypisano w zmianie wartości - zdarzenie "change"
-        // displayWholeToDoList( currentDisplayingListMode );   // to niepotrzebne, skoro wysłanie formy spowoduje automatyczne wyświetlenie 
-        //... tego samego widoku (tylko jego odświeżenie; niepotrzebne?) 
+    loadTestData();
+    
+    console.log("'Click' na DODATKOWYCH DANYCH");
+
+/*     loadTestDataBtn.removeEventListener('click', deleteLoadTestDataBtn, false);   // usunięcie obsługi zdarzenia 'click' na tym elemencie
+    // usunięcie elementu 
+*/
+
+    document.getElementsByClassName('to-do-container')[0].style.marginBottom = '1.5em';
+    loadTestDataBtn.parentNode.removeChild(loadTestDataBtn);    // nie chcesz się wywalić, to spadaj
+
+    // loadTestDataBtn.click();
+    displayWholeToDoList( currentDisplayingListMode );  // aktualizacja widoku
+
 }, false);
 
-/* listTypeSelectorRadio.forEach( function( radioInput, indx ) {   // to nie jQ, trzeba każdemu przyciskowi z osobna jawnie przypisać obsługę zdarzenia 
-    radioInput.addEventListener('change', selectTypeOfToDos, false);   
-});  */
 
     // ======  "PO-STARTOWE" DZIAŁANIE  ======
 
@@ -348,6 +350,26 @@ var fragment = document.createDocumentFragment(),   // nowy fragment dokumentu d
     liElem; // kontener na element listy, jedna pozycja
 allOrDoneOrUndone = allOrDoneOrUndone || 'all';   // 'all' | 'undone' | 'done' -- domyślnie "all" jest widocznością wszystkich elementów 
 
+var isAnyDone = existingToDos.some( function( toDo ) {  // weryfikacja istnienie DOWOLNEGO "wykonanego" zadania na liście 
+    return toDo.done === true;
+});
+
+var isAnyUndone = existingToDos.some( function( toDo ) {    // weryfikacja istnienie DOWOLNEGO zadania "w trakcie"
+    return toDo.done === false;
+});
+
+console.log('PODSUMOWANIE ISTNIENIA KATEGORII "isAnyDone":', isAnyDone, ', "w trakcie":', isAnyUndone);
+
+        // wyświetlenie informacji o braku elementów do wyświetlenia, albo wygeneruj te elementy z listy
+            // pierwszy warunek "zachowawczo" zostaje (pierwszy się sprawdził), bo pusta lista nie spełni zadania!
+    if ( ( existingToDos.length <= 0 ) || ( !isAnyDone && ( allOrDoneOrUndone == 'done' ) ) 
+            || ( !isAnyUndone && ( allOrDoneOrUndone == 'undone' ) ) ) {
+
+        // wyświetlenie informacji o braku elementów, zamiast zostawiania pustego tła o określonej wysokości
+        wholeToDoList.innerHTML = '<p>Brak wpisów</p>';
+    }
+    else {  // wyświetlenie zawartości listy, jako poszczególne elementy <li> ze złożoną zawartością
+
 console.log('PEŁNA LISTA: ', existingToDos, ", tryb: '" + allOrDoneOrUndone + "'");  // dla jasności przy kasowaniu
 
     existingToDos.forEach( function( toDo, indx ) { // tablica globalna
@@ -375,7 +397,8 @@ console.log('PEŁNA LISTA: ', existingToDos, ", tryb: '" + allOrDoneOrUndone + "
     //if ( existingToDos.length > 0 ) // ... potrzebne TO WARYNKOWANIE?!
     wholeToDoList.appendChild( fragment );   // W IE i tak się pokazuje od nowa przy kasowaniu wszytkich ukończonych
      // wstawienie całego fragmentu wewnątrz istniejącego <ul>... ZAWSZE czy WARUNKOWAĆ 
-}
+    }   // if-( existingToDos.length <= 0 )-END
+}   // displayWholeToDoList-END
 
 function findIndexOfCurrentElement ( actionElem ) {
     var 
@@ -404,7 +427,7 @@ function findIndexOfCurrentElement ( actionElem ) {
         
     // console.log("SZUKANIE - rodzic <p>:", parentPElem, ", sąsiad [ ]:", currentCheckbox, "stan:", currentToDoCheckboxState, "EVT_ELEM:", evt.target);
     currentToDoOffset = countOffsetOfCurrentElementFromAllDisplayedElements( actionElem ); // po prostu KTÓRY Z KOLEI jest "klinięty", względem pierwszego ze wszytkich wyświetlonych
-    console.log("SZUKANIE: naciśnięto element '" + actionElemType + "'(status_done: " + currentToDoCheckboxState + "), który jest +", 
+    console.log("SZUKANIE: naciśnięto element '" + actionElemType + "' (status_done: " + currentToDoCheckboxState + "), który jest +", 
         currentToDoOffset, "względem początku wyświetlonej listy.");
 
 /* TRZEBA: poszukiwać tekst, by wykryć pasujący element, by wykryć jego indeks w spisie, ALE nie operować tylko indeksem PIERWSZEGO ZNALEZIONEGO...
@@ -676,3 +699,33 @@ function addNewItem( evt ) {
             }   // if-( goodFormData )-END
         }   // if-( !submitDisabled )-END
 }   // addNewItem-END
+
+function loadTestData() {
+var testData = [
+    { name: 'Nowy i zbędny zapychacz pierwszego miejsca ;)', done: false },
+    { name: 'TEST IDENTYCZNEJ ZAWARTOŚCI', done: true },
+    { name: 'TEST IDENTYCZNEJ ZAWARTOŚCI', done: true },
+    { name: 'TEST IDENTYCZNEJ ZAWARTOŚCI', done: false },
+    { name: 'TEST IDENTYCZNEJ ZAWARTOŚCI', done: true },
+    { name: 'Spożywczak: chleb, nabiał, drożdże, sałata', done: false },
+    { name: 'Stomatolog w poniedziałek (19:30!)', done: false },
+    { name: 'Prezent dla Maćka na urodziny :)', done: true },
+    { name: 'Ukończyć kurs GITa', done: false },
+    { name: 'Wykonać projekt JS z rezerwacją miejsca w samolocie', done: true },
+    { name: 'Kupić bilety do kina (seans na sobotę)', done: true },
+    { name: 'Przepalona żarówka w lampce pokojowej, wybrać ciepłe światło', done: false },
+    { name: 'TEST IDENTYCZNEJ ZAWARTOŚCI', done: true },
+    { name: 'Sprawdzić auto, skonsultować pracę silnika z mechanikiem', done: false }
+];
+
+existingToDos = existingToDos.concat( testData );   // przypisanie do już istniejacych, by je... ZASTĄPIĆ przypisaniem 
+
+}
+
+function deleteLoadTestDataBtn() {      // jest funkcja nazwana, ale nie "trybi" w czasie pierwszej obsługi zdarzenia na tym samym elemencie  
+    console.log("WYŁĄCZONO 'click' na DODATKOWYCH DANYCH");
+    // i nie rób niczego więcej tu
+
+    document.getElementsByClassName('to-do-container')[0].style.marginBottom = '1.5em';
+    loadTestDataBtn.parentNode.removeChild(loadTestDataBtn);    // nie chcesz się wyrejestrować ze zdarzeń przed usunięciem... zatem znikaj! 
+}

@@ -60,11 +60,10 @@ input[type="text"] {
     border: 2px solid #aaa;
 }
 
-input[type="submit"] {
-    min-width: 22%;
-    float: right;
-    margin-top: -0.1em;
-    margin-bottom: 1em;
+input[type="submit"],
+.load-test-data    /* przycisk pod całym komponetem listy (lub na dole) */
+{   
+    font-weight: bold;
     line-height: 0.8em;
     padding: 0.85em 1em;
     cursor: pointer;
@@ -72,7 +71,13 @@ input[type="submit"] {
     background-color: #e0c6eb;  /* #99e487; */
     border: 2px solid #555;
     border-radius: 0.25em;
-    font-weight: bold;
+}
+
+input[type="submit"] {
+    min-width: 22%;
+    float: right;
+    margin-top: -0.1em;
+    margin-bottom: 1em;
 }
 
 input[type="checkbox"],
@@ -95,7 +100,9 @@ input[type="radio"]
 }
 
 input:hover:not(:disabled),
-input:focus:not(:disabled)
+input:focus:not(:disabled),
+.load-test-data:hover,
+.load-test-data:focus
 {
     background-color: #e0c6eb; /* #c4f0b9; */
     border-color: #666;
@@ -104,11 +111,13 @@ input:focus:not(:disabled)
 input[type="radio"]:hover:not(:disabled),
 input[type="radio"]:focus:not(:disabled)
 {
-    background-color: transparent;      /* brak zmiany koloru tła (ewentualnie dla starych przeglądarek) */
+    background-color: transparent;      /* brak zmiany koloru tła - dotyczy ewentualnie starych przeglądarek */
 }    
 
 input[type="submit"]:hover:not(:disabled),
-input[type="submit"]:focus:not(:disabled)
+input[type="submit"]:focus:not(:disabled),
+.load-test-data:hover,
+.load-test-data:focus
 {
     background-color: blueviolet;
     color: white;
@@ -130,6 +139,7 @@ input[type="submit"]:disabled {
 .to-do-container {
     max-width: 660px;
     margin: 1.5em auto;
+    margin-bottom: 6em;;
     padding: 0.6em;
     text-align: left;
     background-color: #f2f2f2;
@@ -150,6 +160,7 @@ input[type="submit"]:disabled {
 }
 
 .to-do-list {
+    min-height: 7em;    /*  16px * 1.05 * 7 =~ 119px =~ 2_<li> (2 * 58px)  */
     list-style: none;
     padding-left: 0;
     margin: 1.5em 0;
@@ -184,6 +195,14 @@ input[type="submit"]:disabled {
     text-decoration-line: line-through;
 }
 
+.to-do-list > p {
+    padding: 2.9em 0;
+    font-weight: bold;    
+    text-align: center;
+    color: #666;
+    background-color: #ddd;
+}
+
 .to-do-list span {
     float: right;
     margin-top: -0.2em; /* zmieniono z -0.4em, po wprowadzeniu podwójnej wysokości dla <p>  */
@@ -192,6 +211,7 @@ input[type="submit"]:disabled {
 }
 
 .bottom-menu {
+    position: relative;
     background-color: #ddd;
     margin: -0.6em;
     padding: 1em;
@@ -207,4 +227,10 @@ input[type="submit"]:disabled {
     float: right;
     margin-top: -0.4em;
     margin-right: -0.4em;
+}
+
+.load-test-data {
+    position: absolute;
+    top: 4.5em;
+    left: 0.5em;
 }
