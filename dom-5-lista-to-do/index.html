@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista to-do (#5 z zadań dodatkowych DOM)</title>
+    <link rel="stylesheet" href="to-do.css">
+</head>
+<body>
+    <div class="to-do-container">
+
+        <div class="title-text">
+                <h2>Lista TO-DO</h2>
+                <p>Brak dodatkowych atrybutów HTMLa wewnątrz wyświetlanych elementów listy.<br />  
+                    Logika JS operuje tylko na odczycie zawartości aktualnie wyświetlonych elementów oraz wzajemnych relacji pomiędzy nimi, 
+                    oraz zawartości globalnej listy - każdy element o strukturze obiektu z dwoma atrybutami:<br /> 
+                    <strong>name</strong>: &ldquo;<em><strong>nazwa zadania</strong></em>&ldquo; 
+                    i <strong>done</strong>: &laquo;<em><strong>true</strong>/<strong>false</strong></em>&raquo;).
+                </p>
+        </div>
+
+        <div class="new-todo">
+            <form id="to-do-form" name="to-do-form" action="#">
+                <input type="text" id="activity-name" name="activity-name" placeholder="Nazwij nowe przypomnienie " />
+                <input type="submit" id="add-activity" name="add-activity" value="Dodaj nowe" />
+            </form>
+        </div>
+
+        <ul class="to-do-list">
+        </ul>
+
+        <div class="bottom-menu">
+            <form id="selected-view" name="selected-view" action="#">
+                <strong>Pokaż:</strong>
+                <label>
+                    <input type="radio" value="all" id="show-completed-all" name="show-completed" checked />  
+                    wszystkie
+                </label>
+                <label>
+                    <input type="radio" value="undone" id="show-completed-undone" name="show-completed" />  
+                    w trakcie
+                </label>
+                <label>
+                    <input type="radio" value="done" id="show-completed-done" name="show-completed" />  
+                    ukończone
+                </label>
+
+                <label>
+                    <button id="delete-completed" name="delete-completed">Usuń ukończone</button>  
+                </label>
+            </form>    
+        </div>
+   
+    </div>
+
+<script src="to-do.js"></script>
+
+</body>
+</html>
