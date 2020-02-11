@@ -129,7 +129,7 @@ function showNotification( someText, anchorObj ) {
     notificationElem.appendChild( headerElem ); 
         if ( positionOfErrorText >= 0 ) notificationElem.style.borderColor = 'red'; // wstawi w czerwonej ramce każdy tekst polskiego błędu
 
-    document.documentElement.appendChild( notificationElem );   // pośrednie przejście do rodzica i wstawienie za nim (na jego końcu) w DOMie strony
+    document.body.appendChild( notificationElem );   // pośrednie przejście do GŁÓWNEGO RODZICA (<body>) i wstawienie za nim (na jego końcu) w DOMie strony
     // }
 
     if ( anchorObj ) {  // powtórzenie warunku, ale element musi być wstawiony w DOM, aby podpiąć mu zdarzenie

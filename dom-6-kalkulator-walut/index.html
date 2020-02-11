@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator walut (#6 z zadań dodatkowych DOM)</title>
+    <link rel="stylesheet" href="currency.css">
+</head>
+<body>
+    
+    <div class="currency-converter-container">
+        <h2>Kalkulator walut</h2>
+        <p>(... podobno przelicza wynik na bieżąco, podczas wpisywania wartości.)</p>
+        <div class="button-container">
+            <div class="input-currency">
+                <label for="input-currency-name">waluta bazowa <span></span></label>
+                <select id="input-currency-name" name="input-currency-name">
+                    <option value="">Wybierz walutę</option>
+                </select>
+                <label for="input-amount">kwota bazowa</label>
+                <input type="text" id="input-amount" name="input-amount" maxlength="23" value="0" placeholder="Wpisz wartość" />
+            </div>
+
+            <div>
+                &LeftRightArrow;
+            </div>
+
+            <div class="output-currency">
+                <label for="output-currency-name">waluta wynikowa <span></span></label>
+                <select id="output-currency-name" name="output-currency-name">
+                    <option value="">Wybierz walutę</option>
+                </select>
+                <label for="output-amount">kwota wynikowa</label>
+                <input type="text" id="output-amount" name="output-amount" maxlength="23" value="0" placeholder="Wpisz wartość" />
+
+            </div>
+        </div>
+    </div>
+
+<script src="currency.js"></script>
+
+</body>
+</html>

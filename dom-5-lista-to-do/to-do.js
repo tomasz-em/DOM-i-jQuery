@@ -139,7 +139,7 @@ function showNotification( someText, anchorObj ) {
         if ( positionOfErrorText >= 0 ) notificationElem.style.borderColor = 'red'; // wstawi w czerwonej ramce każdy tekst "polskiego błędu:.. 
             // ...gdy to ma być komunikat o błędzie, a nie po prostu powiadomienie o jakimś działaniu
 
-    document.documentElement.appendChild( notificationElem );   // pośrednie przejście do rodzica i wstawienie za nim (na jego końcu) w DOMie strony
+    document.body.appendChild( notificationElem );   // pośrednie przejście do rodzica i wstawienie za nim (na jego końcu) w DOMie strony
     // }
 
     if ( anchorObj ) {  // powtórzenie warunku, ale element musi być wstawiony w DOM, aby podpiąć mu zdarzenie
@@ -358,7 +358,7 @@ var isAnyUndone = existingToDos.some( function( toDo ) {    // weryfikacja istni
     return toDo.done === false;
 });
 
-console.log('PODSUMOWANIE ISTNIENIA KATEGORII "isAnyDone":', isAnyDone, ', "w trakcie":', isAnyUndone);
+console.log('PODSUMOWANIE ISTNIENIA KATEGORII "wykonane":', isAnyDone, ', "w trakcie":', isAnyUndone);
 
         // wyświetlenie informacji o braku elementów do wyświetlenia, albo wygeneruj te elementy z listy
             // pierwszy warunek "zachowawczo" zostaje (pierwszy się sprawdził), bo pusta lista nie spełni zadania!
@@ -719,7 +719,6 @@ var testData = [
 ];
 
 existingToDos = existingToDos.concat( testData );   // przypisanie do już istniejacych, by je... ZASTĄPIĆ przypisaniem 
-
 }
 
 function deleteLoadTestDataBtn() {      // jest funkcja nazwana, ale nie "trybi" w czasie pierwszej obsługi zdarzenia na tym samym elemencie  

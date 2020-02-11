@@ -1,0 +1,144 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.2em;
+}
+
+h2 {
+    margin: 0;
+    text-align: left;
+    color: orangered;
+}
+
+p {
+    text-align: left;
+    margin: 0.5em auto;
+}
+
+input,
+select
+{
+    font-size: 1.1em;
+    padding: 0.1em 0.5em;
+    transition: background-color 0.2s;
+
+}
+
+input[type="text"],
+select
+{
+    width: 13em;
+    text-align: right;
+    border: 2px solid #aaa;
+}
+
+select
+{
+    width: 14.2em;
+}
+
+select:hover:not(:disabled),
+select:focus:not(:disabled),
+input:hover:not(:disabled),
+input:focus:not(:disabled)
+{
+    /* background-color: #eba084; */
+    background-color: rgb(255, 81, 17);
+    color: white;
+
+    border-color: #444;
+}
+
+select > option {
+    background-color: white;
+    color: black;
+}
+
+input:disabled,
+input[disabled]
+{
+    cursor: not-allowed;
+}
+
+label {
+    font-size: 0.8em;
+}
+
+label > span {
+    color: orangered;
+    font-weight: bold;
+}
+
+.currency-converter-container {
+    max-width: 666px;
+    margin: 2em auto;
+    padding: 0.8em;
+    text-align: center;
+    background-color: #f5f5f5;
+    border: 2px solid #aaa;
+}
+
+.button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+}
+
+.button-container > div:nth-of-type(2) {
+    padding: 1em;
+    font-weight: bold;
+    text-shadow: 0 0 1px black;
+}
+
+.input-currency > *,
+.output-currency > *
+{
+    display: block;
+}
+
+.animate-rotation-180 {
+    /* animation: rotate-y-180 0.3s;
+    animation-fill-mode: both; */
+
+    transform: rotateY(180deg);     /* prostsze podejście, bez tworzneia dwóch klas i animacji oraz zabawy z jej trybami i cofaniem/nadawaniem zmian */
+}
+
+
+/* @keyframes rotate-y-180 {
+    100% { 
+        transform: rotateY(180deg);
+    }
+} */
+
+.notification {
+    max-width: 525px;
+    margin: 1em auto;
+    padding: 0.8em;
+    text-align: center;
+    background-color: #f2f2f2;
+    border: 2px solid #aaa;
+}
+
+.notification:first-of-type {
+    margin-top: 2em;
+}
+
+.notification > h3 {
+    margin: 0.2em auto;
+    color: orangered;
+}
+
+.notification > h5 {
+    margin: 0.5em -0.95em;
+    text-transform: uppercase;
+    letter-spacing: 1em;
+    background-color: darkgray;
+    padding: 0.3em;
+    color: white;
+}
+
+.notification > p {
+    font-size: 0.8em;
+    text-align: justify;
+    margin: 0;
+}
