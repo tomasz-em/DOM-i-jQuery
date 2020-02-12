@@ -96,6 +96,11 @@ label > span {
     display: block;
 }
 
+.currency-converter-container .convertion-source {   /* dla zwiększenia siły selektora */
+    border-color: #444;;
+}
+
+
 .animate-rotation-180 {
     /* animation: rotate-y-180 0.3s;
     animation-fill-mode: both; */

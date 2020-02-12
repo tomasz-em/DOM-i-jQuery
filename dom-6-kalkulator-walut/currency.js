@@ -18,7 +18,7 @@ var currenciesUsed = [
     
     currencyTable = {
         'PLN-GBP': {
-            ratio: 4
+            ratio: 5.5
         }
     },     // globalna lista przeliczeń pomiędzy używanymi walutami 
     curenciesUsedCodes,     // "obiekt-tabela" na wszystkie znane do tej pory przekształcenia walutowe
@@ -36,20 +36,23 @@ var currenciesUsed = [
     rightCurrencyAmount = 0,
     selectedLeftCurency = null,
     selectedRightCurency = null,
-    firstConvertion = true, // wskaźnik, czy to pierwsze przeliczenie; by wskazać pierwszy "kierunek konwersji" (raczej "zwrot")
+    // firstConvertion = true, // wskaźnik, czy to pierwsze przeliczenie; by wskazać pierwszy "kierunek konwersji" (raczej "zwrot")
     //toggleBtn = document.getElementById('selector'),
-    classOfCurrent = "current";     // był zamiar użycia wraz z wyznaczniem "kierunku" konwersji (też w odniesieniu do aktywnego pola),  
-                // ...ale przyjęta logika nie wykorzystuje tej zmiennej; przy innym warunku warto się trzymać bardziej logiki JS, 
-                // ...a nie atrybutów formularza (co może być złudne)
+    classOfCurrentSourceValue = "convertion-source",     // jako wyznacznik źródła "kierunku" konwersji (też w odniesieniu do aktywnego pola)
+    freePlanOfAPI = true;   // określenie używanego API, wersja "free" nie pozwala zapytywać o kurs dowolnych walut między sobą
+// !!! ...W API "fixer.io" NA SZTYWNO UŻYWANE JEST PRZELICZENIE DO EURO ("EUR") WZGLĘDEM WYBRANYCH WALUT WYJŚCIOWYCH !!!
 
     curenciesUsedCodes = currenciesUsed.map(function( currency ) {    // póki co zwraca TABELĘ, nie POSTAĆ TEKSTOWĄ (zawsze będą prawidłowe wartości tu)
         return currency.code;
     });
     // currenciesString = curenciesUsedCodes.join(',');   // teraz tabela kodów walut staje się tekstem, rozdzielonym przecinkami
-        // zerowanie pól tekstowyhc formulkarza na starcie
+        // STARTOWE MODYFIKACJE DOMu
     leftCurrencyAmountInput.value = leftCurrencyAmount;
     rightCurrencyAmountInput.value = rightCurrencyAmount;
-
+    if ( !leftCurrencyAmountInput.classList.contains( classOfCurrentSourceValue ) 
+        || !rightCurrencyAmountInput.classList.contains( classOfCurrentSourceValue ) ) {
+        leftCurrencyAmountInput.classList.add( classOfCurrentSourceValue );
+    }    
     createHTMLOptionsForBothSelects();
 
 
@@ -66,14 +69,20 @@ var currenciesUsed = [
 
 //toggleBtn.addEventListener("click", toggleUnits, false);
 
+
+leftCurrencyAmountInput.addEventListener("focus", makeMeCurrentSourceValue, false);     // "click" też zapewnia "focus", nie ma więc potrzeby dokładać koljnego zdarzenia
+rightCurrencyAmountInput.addEventListener("focus", makeMeCurrentSourceValue, false);
+
 leftCurrencyTypeSelect.addEventListener("change", function( event ) {
     // convertCurrencies( event ); // przekazanie obiektu zdarzenie do funkcji, która wcześniej obsługiwała zdarzenie 
-    updateFromLeftValues();     // wymusenie aktualizacji treści WE i przeliczenia 
+    // updateFromLeftValues();     // wymusenie aktualizacji treści WE i przeliczenia
+    updateFromTheLeftOrRightSide( event ); 
 }, false );
 
 rightCurrencyTypeSelect.addEventListener("change", function( event ) {
     // convertCurrencies( event );  // ...ALE W ZASADZIE TO I TAK JEST NIEPOTRZEBNE POWIELENIE ZAPYTANIA (PRZED PRZELICZENIEM)... w update() jest wywołanie convert()
-    updateFromRightValues();
+    // updateFromRightValues();
+    updateFromTheLeftOrRightSide( event ); 
 }, false);
 
 leftCurrencyAmountInput.addEventListener("input", updateFromLeftValues, false);
@@ -107,6 +116,16 @@ function unblockSelectElements() {
     rightCurrencyTypeSelect.removeAttribute('disabled');
 }
 
+function makeMeCurrentSourceValue( evt ) {
+
+    if ( !evt.target.classList.contains( classOfCurrentSourceValue ) ) {    
+    // gdy NIE MA to zabierz z obu elementów (jeden MOŻE MIEĆ) bez weryfkacji który jets bieżącym
+        leftCurrencyAmountInput.classList.remove( classOfCurrentSourceValue );
+        rightCurrencyAmountInput.classList.remove( classOfCurrentSourceValue);
+        evt.target.classList.add( classOfCurrentSourceValue );
+    }
+}
+
 function convertCurrencies( eventObj ) {
 var leftCurrencyTypeOK = checkCurrencyOptionSelected( leftCurrencyTypeSelect ),
     rightCurrencyTypeOK = checkCurrencyOptionSelected( rightCurrencyTypeSelect ),
@@ -114,13 +133,15 @@ var leftCurrencyTypeOK = checkCurrencyOptionSelected( leftCurrencyTypeSelect ),
     outputCurrencies,   // lista żądanych walut wynkowych
     selectedFrom,
     selectedTo,
+    anyInputTextPreviouslySelected = false, // czy dowolne z pól tekstowych kwoty wejściowej zostało już wcześniej wskazane? 
     spanElem,
     currentRatio;
 
     if ( leftCurrencyTypeOK ) {    // gdy jest pierwszy z wyborów zatwierdzony
         spanElem = leftCurrencyTypeSelect.parentNode.getElementsByTagName('span')[0];
         spanElem.textContent = "OK";
-    } else {
+    } 
+    else {
         spanElem = leftCurrencyTypeSelect.parentNode.getElementsByTagName('span')[0];
         spanElem.textContent = " ";
     }
@@ -128,7 +149,8 @@ var leftCurrencyTypeOK = checkCurrencyOptionSelected( leftCurrencyTypeSelect ),
     if ( rightCurrencyTypeOK ) {    // gdy jest pierwszy z wyborów zatwierdzony
         spanElem = rightCurrencyTypeSelect.parentNode.getElementsByTagName('span')[0];
         spanElem.textContent = "OK";
-    } else {
+    }
+    else {
         spanElem = rightCurrencyTypeSelect.parentNode.getElementsByTagName('span')[0];
         spanElem.textContent = " ";
     }
@@ -139,11 +161,23 @@ var leftCurrencyTypeOK = checkCurrencyOptionSelected( leftCurrencyTypeSelect ),
             // usuń poprzednie powiadomienia
             deleteNotifications();
 
+            if ( leftCurrencyAmountInput.classList.contains( classOfCurrentSourceValue ) ) {
+                selectedFrom = leftCurrencyTypeSelect.value;
+                selectedTo = rightCurrencyTypeSelect.value;
+                anyInputTextPreviouslySelected = true;
+            }
+
+            if ( rightCurrencyAmountInput.classList.contains( classOfCurrentSourceValue ) ) {
+                selectedFrom = rightCurrencyTypeSelect.value;
+                selectedTo = leftCurrencyTypeSelect.value;
+                anyInputTextPreviouslySelected = true;
+            }
+
             // wykonaj zapytaniue do API, zależnie od wybranego "zwrotowi konwersji", czyli która waluta jest wzięta za bazową
             // TE WARUNKI PONIŻEJ MOGĄ WYDAWAĆ SIĘ NA ODWRÓT USTALONE, ALE W RZECXYWISTOŚCI TAK WŁAŚNIE WYBIERAMY "PIERWSZE PRZELICZNIE"...
             // ...NAJPIERW WALUTA BAZOWA I JEJ WARTOŚĆ, BY "NA KOŃCU" WSKAZAĆ CEL PRZELICZENIA... zatem lista wyboru zmieniona jako "DRUGA" potwierdza wybór konwersji 
             // ...(przynajmniej tak w pierwszym przeliczneiou powinien działać algorytm; może jakąś zmienną sygnałową dać?) 
-            if ( eventObj.target == rightCurrencyTypeSelect ) {     // TO PONIŻEJ MOŻNA UPROŚCIĆ DO DWÓCH WARUNKÓW!!!
+/*             if ( eventObj.target == rightCurrencyTypeSelect ) {     // TO PONIŻEJ MOŻNA UPROŚCIĆ DO DWÓCH WARUNKÓW!!!
                 // jeśli jest to PRAWY, to wykonaj przeliczenie WZGLĘDEM waluty wybranej z LEWEJ!... ale TYLKO za PIERWSZYM RAZEM
                 if ( firstConvertion ) {    // pierwsze przeliczenie?
                     // ZAMIANA: wycięcie wejściowej waluty z listy przekształcanych; druga waluta jako "docelowe" przeliczenie, zatem na początku
@@ -160,26 +194,26 @@ var leftCurrencyTypeOK = checkCurrencyOptionSelected( leftCurrencyTypeSelect ),
                 // jeśli jest to LEWY <select>, to wykonaj przeliczenie WZGLĘDEM waluty wybranej z PRAWEJ!... ale TYLKO za PIERWSZYM RAZEM
                 if ( firstConvertion ) {    // pierwsze przeliczenie?
                     selectedFrom = rightCurrencyTypeSelect.value;
-                    selectedTo = leftCurrencyTypeSelect.value;
+                    selectedTo = leftCurrencyTypeSelect.value; */
 /*                  outputCurrencies = makeOutputCurrenciesWithoutSpecified( rightCurrencyTypeSelect.value, leftCurrencyTypeSelect.value,  );   
                     currentRatio = askForConvertingCurrencyRatio( rightCurrencyTypeSelect.value, outputCurrencies );    // przygotowanie ajaksa */
-                } else {
+/*                 } else {
                     selectedFrom = leftCurrencyTypeSelect.value;
                     selectedTo = rightCurrencyTypeSelect.value;
                 }
-            }
+            } */
 
             // "później" odblokuj te oba pola wyboru, niezależnie od powodzenia tej opearacji zapytania
             // też usuń tą informację, skoro sukces... lub porażka  
-            outputCurrencies = makeOutputCurrenciesWithoutSpecified( selectedFrom, selectedTo );   
-            currentRatio = askForConvertingCurrencyRatio( selectedFrom, outputCurrencies );    // przygotowanie ajaksa
+            if ( anyInputTextPreviouslySelected ) {
+                outputCurrencies = makeOutputCurrenciesWithoutSpecified( selectedFrom, selectedTo );   
+                currentRatio = askForConvertingCurrencyRatio( selectedFrom, outputCurrencies );    // przygotowanie ajaksa
 
                 if ( currentRatio ) {
 
                     if ( eventObj.target == leftCurrencyTypeSelect ) {
                         // updateFromLeftValues();
                         console.log("Otrzymano <<jakieś>> dane dla konwersji WZGLĘDEM LEWEJ:", currentRatio);
-
                     }
 /*                     if ( eventObj.target == rightCurrencyTypeSelect ) {
                         updateFromRightValues();
@@ -187,12 +221,16 @@ var leftCurrencyTypeOK = checkCurrencyOptionSelected( leftCurrencyTypeSelect ),
                     } */
                     
                 return currentRatio;    // zwróć przelicznik 
-                }
-        }
+                }                
+            }
+            else {
+                return null;    // NIE KONWERTUJ, SKORO NIE OKREŚLONO CO ŹRÓŁEM, A CO CELEM
+                // w takim wypadku najlepeiej  wcześniej jedno z pól formularza WYBRAĆ ŹRÓDŁEM na sztywno, by tu nie trafił nigdy warunek 
+            }   // if-( anyInputTextPreviouslySelected )-END
+        }   // if-( leftCurrencyTypeSelect.value != rightCurrencyTypeSelect.value )-END
         else {  // ... są IDENTYCZNE waluty wybrane w obu listach
-            firstConvertion = false;
             console.log('IDENTYCZNE POLA w listach wyboru', leftCurrencyTypeSelect.value);  // LEWYinput == PRAWYinput I DWROTNIE 
-            return 1;   // jako ratio  - TE SAME WARTOŚCI w obu listach wyboru
+            return 1;   // jako ratio - TE SAME WARTOŚCI w obu listach wyboru
         }
     } // if-( leftCurrencyTypeOK && rightCurrencyTypeOK )-END {
 return null;        
@@ -220,15 +258,18 @@ var fakeEmptyObjAsEventObj = { target: leftCurrencyTypeSelect },
     }
         // BEZ reszty w "else", BO TO NIE SĄ WYKLUCZAJĄCE SIĘ PRZYPADKI! (tzn. błędna wartość w polu tekstowym, a przelieczenie (do zapytania lub istniejące))
     // else {  // są prawidłowe dane liczbowe w polach wpisywania formularzach
-    resultRatio = convertCurrencies( fakeEmptyObjAsEventObj );
-    console.log("PRZELICZENIA względem LEWEJ strony, współczynnik konwersji:", resultRatio);
-
-    if ( resultRatio ) {
-        rightCurrencyAmount = leftCurrencyAmount * resultRatio;   // wykonaj przeliczenie, ewentualnie dla (0C)
-        rightCurrencyAmountInput.value = rightCurrencyAmount.toFixed(2);   // odświeżenie zawartości drugiego pola (wyjścowy format walutowy)
-    }
-    else {
-        rightCurrencyAmountInput.value = "WARTOŚĆ NIEPRZELICZONA"
+    
+    if ( leftCurrencyAmountInput.classList.contains( classOfCurrentSourceValue ) ) {
+        resultRatio = convertCurrencies( fakeEmptyObjAsEventObj );
+        console.log("PRZELICZENIA względem LEWEJ strony, współczynnik konwersji:", resultRatio);
+    
+        if ( resultRatio ) {
+            rightCurrencyAmount = leftCurrencyAmount * resultRatio;   // wykonaj przeliczenie, ewentualnie dla (0C)
+            rightCurrencyAmountInput.value = rightCurrencyAmount.toFixed(2);   // odświeżenie zawartości drugiego pola (wyjścowy format walutowy)
+        }
+        else {
+            rightCurrencyAmountInput.value = "WARTOŚĆ NIEPRZELICZONA"
+        }
     }
 
 /*         if ( eventObj.target == leftCurrencyTypeSelect ) {  // względem lewej listy wyboru (lewej STRONY ogólnie)
@@ -266,6 +307,8 @@ function updateFromRightValues ( eventObj ) {
         else {  // są prawidłowe dane liczbowe w polach wpisywania formularzach
             rightCurrencyAmountInput.value = rightCurrencyAmount;     // przekelejenie tej skonwertowanej liczby do tego pola (np. pozbycie się wiodącego zera)
         }
+
+    if ( rightCurrencyAmountInput.classList.contains( classOfCurrentSourceValue ) ) {
         resultRatio = convertCurrencies( fakeEmptyObjAsEventObj );
         console.log("PRZELICZENIA względem PRAWEJ strony, współczynnik konwersji:", resultRatio);
 
@@ -276,9 +319,26 @@ function updateFromRightValues ( eventObj ) {
         else {
             leftCurrencyAmountInput.value = "WARTOŚĆ NIEPRZELICZONA"
         }
+    }
+
     // }
 }   // updateFromRightValues-END
 
+function updateFromTheLeftOrRightSide( event ) {
+var leftInputIsSelected = leftCurrencyAmountInput.classList.contains( classOfCurrentSourceValue ),
+    rightInputIsSelected = rightCurrencyAmountInput.classList.contains( classOfCurrentSourceValue );
+
+    console.log('UPDATE-LEFT-RIGHT, lewy:', leftInputIsSelected, "prawy:", rightInputIsSelected);
+
+    if ( leftInputIsSelected && !rightInputIsSelected ) {
+        console.log("Odpalono z wyborem wg pól LEWEJ strony...");
+        updateFromLeftValues( /* event */ ); // z obiektem zdarzenie puścić?
+    }
+    if ( !leftInputIsSelected && rightInputIsSelected ) {
+        console.log("Odpalono z wyborem wg pól PRAWEJ strony...");
+        updateFromRightValues( /* event */ ); // a obiekt zdarzenia?
+    }
+}
 
 function updateFromCelsius() {
 leftCurrencyAmount = evaluateToNumber( leftCurrencyAmountInput.value );
@@ -481,7 +541,6 @@ var newValues,  // tablica zawierajaca przeliczenia, zwraca jako odpowiedź z AP
 
     console.log("wysłano zapytanie o przeliczenie", fromCurrencyCode, "na", toCurrencyCodesString);
     if ( wantedConversionRatio in currencyTable ) {     // jesli treść szukana znajduje się już w obiekcie
-        firstConvertion = false;    // dla potrzeb testów 
         console.log("(+) Odczytano z CACHE!", wantedConversionRatio);
         return currencyTable[ wantedConversionRatio ].ratio;   // wartość konkretnego atrybutu w otrzymanym obiekcie
     }
@@ -490,7 +549,6 @@ var newValues,  // tablica zawierajaca przeliczenia, zwraca jako odpowiedź z AP
                     // zablokuj OBA menu wyboru do czasu uzyskania odpowiedzi
         blockSelectElements();  // efektywnie to TUTAJ należy blokwać listy wyboru
         prepareXMLHttpRequestForCurrency( fromCurrencyCode, toCurrencyCodesString );
-        firstConvertion = false;    // jako JUŻ WYKONANE "pierwsze przeliczenie"
         // TO PONIŻEJ PRZENIEŚĆ JAKOŚ DO FUNKCJI ZWROTNEJ "SUKCES"... ALE JAK TO PÓŻNIEJ ZWRÓCIĆ.. czyżby wywołać ponownie tę "funkcję-matkę"?! 
 
         showNotification('Wykonano zapytanie o przeliczenie ' + fromCurrencyCode + ' na ' + toCurrencyCodesString.substr(0,3) ); // 
@@ -510,6 +568,7 @@ return null;
 
 function prepareXMLHttpRequestForCurrency( inputCurrencyCode, outputCurrenciesString ) {
 var APIkey = '86a253ac9fb654d2978a3db6e7a77107',
+
     // APIkey = 'aaa666aaa', // TO JEST SPECJALNIE ZEPSUTY CIĄG KLUCZA DO APLI, NA WCZENSE TESTY 
     apiServer = 'http://data.fixer.io/api/',
     apiQuery,
@@ -617,13 +676,14 @@ console.log("ZAPYTANIE AJAX - SUKCES:", evt);
                 currencyTable[ counterConversionRatio ] = 1 / newValues[i];  // przeliczana "WARTOŚĆ ODWROTNA"
             }
  */
-        showNotification('Sukces, kowersja ' + baseCurrency + " na " + targetCurrency[0] + " to kurs ...");   // nie moa dosępu do rodzica-rodzica
+        showNotification('Sukces, konwersja ' + baseCurrency + " na " + resolvedData.rates[0] + " to kurs ...");   // nie moa dosępu do rodzica-rodzica
 
+        console.log("zaktualizować JAKOŚ GDY: baza", baseCurrency, "resolvedData.rates[0]", resolvedData.rates[0], 
+        "targetCurrency[0]", targetCurrency[0], "targetCurrency", targetCurrency );    
 
-            // WYMUŚ AKTUALIZACJĘ WARTOŚCI:
+            // WYMUŚ AKTUALIZACJĘ WARTOŚCI... słabe warunki:
         if ( ( baseCurrency == leftCurrencyTypeSelect.value ) && ( baseCurrency != rightCurrencyTypeSelect.value ) 
             && ( targetCurrency[0] == rightCurrencyTypeSelect.value ) && ( targetCurrency[0] != leftCurrencyTypeSelect.value ) ) {
-                
             updateFromLeftValues();     // wywołaj aktualizację na rzecz wartości z LEWEJ części formularza   
         }
 
@@ -632,6 +692,8 @@ console.log("ZAPYTANIE AJAX - SUKCES:", evt);
             
             updateFromRightValues();    // wywołaj aktualizację na rzecz wartości z LEWEJ części formularza   
         }
+
+        updateFromTheLeftOrRightSide();
     } 
     else {
         notifyText = resolvedData.error.info;
