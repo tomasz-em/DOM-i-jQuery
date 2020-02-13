@@ -10,14 +10,18 @@
     
     <div class="currency-converter-container">
         <h2>Kalkulator walut</h2>
-        <p>(... podobno przelicza wynik na bieżąco, podczas wpisywania wartości.)</p>
+        <p>Przelicza wynik na bieżąco, podczas wpisywania lub zmiany waluty. Wybór strony dla przeliczeń <em>źródło-cel</em> nieistotny, 
+           nie ma znaczenia też kolejność wyboru pól.<br />
+           Wysyła jedno zapytanie do API o przelicznik dla wszystkich używanych walut.<br />
+           Wartości walut wyliczane pomiędzy sobą z bieżącego kursu do euro.
+        </p>
         <div class="button-container">
-            <div class="input-currency">
-                <label for="input-currency-name">waluta bazowa <span></span></label>
+            <div class="left-input-currency">
+                <label for="input-currency-name">waluta<span></span></label>
                 <select id="input-currency-name" name="input-currency-name">
                     <option value="">Wybierz walutę</option>
                 </select>
-                <label for="input-amount">kwota bazowa</label>
+                <label for="input-amount">kwota</label>
                 <input type="text" id="input-amount" name="input-amount" maxlength="23" value="0" placeholder="Wpisz wartość" />
             </div>
 
@@ -25,16 +29,22 @@
                 &LeftRightArrow;
             </div>
 
-            <div class="output-currency">
-                <label for="output-currency-name">waluta wynikowa <span></span></label>
+            <div class="right-output-currency">
+                <label for="output-currency-name">waluta<span></span></label>
                 <select id="output-currency-name" name="output-currency-name">
                     <option value="">Wybierz walutę</option>
                 </select>
-                <label for="output-amount">kwota wynikowa</label>
+                <label for="output-amount">kwota</label>
                 <input type="text" id="output-amount" name="output-amount" maxlength="23" value="0" placeholder="Wpisz wartość" />
 
             </div>
         </div>
+    </div>
+
+    <div class="currency-table-status">
+        <h2>Znane AKTUALNE przeliczenia</h2>
+        <ul class="currency-table">
+        </ul>
     </div>
 
 <script src="currency.js"></script>

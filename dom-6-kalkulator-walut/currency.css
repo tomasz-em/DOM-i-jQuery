@@ -1,6 +1,11 @@
+* {
+    box-sizing: border-box;
+}
+
+
 body {
     font-family: Arial, Helvetica, sans-serif;
-    font-size: 1.2em;
+    font-size: 1.15em;
 }
 
 h2 {
@@ -26,15 +31,15 @@ select
 input[type="text"],
 select
 {
-    width: 13em;
+    width: 15.2em;
     text-align: right;
     border: 2px solid #aaa;
 }
 
-select
+/* select
 {
-    width: 14.2em;
-}
+    width: 15.2em;
+} */
 
 select:hover:not(:disabled),
 select:focus:not(:disabled),
@@ -61,6 +66,7 @@ input[disabled]
 
 label {
     font-size: 0.8em;
+    padding: 0.2em;
 }
 
 label > span {
@@ -69,7 +75,7 @@ label > span {
 }
 
 .currency-converter-container {
-    max-width: 666px;
+    max-width: 705px;
     margin: 2em auto;
     padding: 0.8em;
     text-align: center;
@@ -85,13 +91,14 @@ label > span {
 }
 
 .button-container > div:nth-of-type(2) {
-    padding: 1em;
+    padding: 0.9em;
+    padding-top: 1.7em;     /* strzałka jest wtedy pomiędzy pustymi obszarami w pionie */
     font-weight: bold;
     text-shadow: 0 0 1px black;
 }
 
-.input-currency > *,
-.output-currency > *
+.left-input-currency > *,
+.right-output-currency > *
 {
     display: block;
 }
@@ -146,4 +153,48 @@ label > span {
     font-size: 0.8em;
     text-align: justify;
     margin: 0;
+}
+
+.currency-table-status {
+    display: none;
+    position: fixed;
+    bottom: 0px;
+    left: 0px;
+    width: 100%;
+    /* height: auto; */
+    font-size: 0.9em;
+    padding: 0.5em;
+    background-color: rgba(255, 69, 0, 1);    /* orangered @ 100% */
+    max-height: 8em;
+    overflow-y: auto;
+}
+
+.currency-table-status h2 {
+    color: white;
+    text-align: center;
+    padding-bottom: 0.3em;
+}
+
+.currency-table {
+    color: #444;
+    background-color: rgba(255, 69, 0, 0.8);    /* orangered @ 100% */
+    margin: 0;
+    padding-left: 0;
+    list-style: none;
+}
+
+.currency-table > li {
+    display: inline-block;
+    word-wrap: break-word;
+    padding: 0.35em;
+    color: #fff;
+}
+
+.currency-table > li:nth-of-type(2n) {
+    background-color: rgba(255, 100, 30, 0.8);   /* BYŁO: orangered @ 100% */
+}
+
+.currency-table > li > span {
+    color: #222;
+    font-weight: bold;
 }
