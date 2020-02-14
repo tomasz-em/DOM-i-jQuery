@@ -60,20 +60,15 @@ var currenciesUsed = [
 leftCurrencyAmountInput.addEventListener("focus", makeMeCurrentSourceValue, false);     // "click" też zapewnia "focus", nie ma więc potrzeby dokładać koljnego zdarzenia
 rightCurrencyAmountInput.addEventListener("focus", makeMeCurrentSourceValue, false);
 
-leftCurrencyTypeSelect.addEventListener("change", function( event ) {
-    // convertCurrencies( event ); // przekazanie obiektu zdarzenie do funkcji, która wcześniej obsługiwała zdarzenie 
-    // updateFromLeftValues();     // wymusenie aktualizacji treści WE i przeliczenia
-    updateFromTheLeftOrRightSide( true ); 
-}, false );
-
-rightCurrencyTypeSelect.addEventListener("change", function( event ) {
-    // convertCurrencies( event );  // ...ALE W ZASADZIE TO I TAK JEST NIEPOTRZEBNE POWIELENIE ZAPYTANIA (PRZED PRZELICZENIEM)... w update() jest wywołanie convert()
-    // updateFromRightValues();
-    updateFromTheLeftOrRightSide( true ); 
-}, false);
+leftCurrencyTypeSelect.addEventListener("change", updateFromTheLeftOrRightSide, false); 
+rightCurrencyTypeSelect.addEventListener("change", updateFromTheLeftOrRightSide, false);
 
 leftCurrencyAmountInput.addEventListener("input", updateFromLeftValues, false);
 rightCurrencyAmountInput.addEventListener("input", updateFromRightValues, false);
+
+document.getElementsByClassName('https-info')[0].addEventListener("click", function( eventObj ) {
+    document.body.removeChild( eventObj.target.parentNode );   // usuń rodzica dla naciśniętego przycisku
+}, false);
 
 // -----  funkcje  -----
 
@@ -669,6 +664,7 @@ var mainElem = document.getElementsByClassName('currency-table-status')[0],
         fragment.appendChild( newLi );    // PRZYPISANIE TREŚCI Z OSOBNA
     });
 
+    document.body.style.paddingBottom = '8em';
     innerElem.appendChild( fragment );
 } // printCurrencyTable-END
 

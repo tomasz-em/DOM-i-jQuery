@@ -131,13 +131,43 @@ label > span {
     border: 2px solid #aaa;
 }
 
-.notification:first-of-type {
-    margin-top: 2em;
+.notification.info {
+    max-width: 705px;
+    padding: 0.5em;
+    background-color: #f77445; /* #ff682f; */
+}
+
+.notification.info button {
+    font-size: 1.1em;;
+    padding: 0.25em 0.75em;
+    margin-top: 0.25em;
+    background-color: #f5f5f5;
+    border: 2px #aaa solid;
+    color: black;
+    transition: color 0.2s, border-color 0.2s, background-color 0.2s;
+}
+
+.notification.info button:hover {
+    /* background-color: white; */
+    border-color: #444;
+    color: orangered;
+}
+
+
+
+.currency-converter-container ~ .notification { /* lepszy selektor rodzeństwa niż położenie: .notification:first-of-type */
+    margin-top: 2em;    /* choć TA SAMA reguła jest w poprzeniku */
 }
 
 .notification > h3 {
     margin: 0.2em auto;
     color: orangered;
+}
+
+.notification > h4 {
+    margin: 0.2em auto;
+    color: #222;
+    font-weight: normal;
 }
 
 .notification > h5 {
@@ -164,7 +194,7 @@ label > span {
     /* height: auto; */
     font-size: 0.9em;
     padding: 0.5em;
-    background-color: rgba(255, 69, 0, 1);    /* orangered @ 100% */
+    background-color: rgba(247, 116, 69, 1);    /* wcześniej: orangered @ 100% */
     max-height: 8em;
     overflow-y: auto;
 }
@@ -177,7 +207,7 @@ label > span {
 
 .currency-table {
     color: #444;
-    background-color: rgba(255, 69, 0, 0.8);    /* orangered @ 100% */
+    background-color: #f77445;    /* orangered @ 100% */
     margin: 0;
     padding-left: 0;
     list-style: none;
@@ -192,6 +222,10 @@ label > span {
 
 .currency-table > li:nth-of-type(2n) {
     background-color: rgba(255, 100, 30, 0.8);   /* BYŁO: orangered @ 100% */
+}
+
+.currency-table > li:nth-of-type(2n+1) {
+    background-color: rgba(204, 71, 9, 0.8);   /* BYŁO: orangered @ 100% */
 }
 
 .currency-table > li > span {
