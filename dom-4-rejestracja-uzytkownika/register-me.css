@@ -71,7 +71,13 @@ input:focus:not(:disabled)
 {
     background-color: #c4f0b9;
     border-color: #666;
-}    
+}
+
+input.bad:not(:disabled),
+input.bad:not(:disabled)
+{
+    background-color: #f0b9c4;      /* pozycje wartości składowych RGB zamienione wzglkedem zielonego "oryginału" */
+}   
 
 input[type="submit"]:hover:not(:disabled),
 input[type="submit"]:focus:not(:disabled)
@@ -84,8 +90,9 @@ input[type="submit"]:focus:not(:disabled)
 input:disabled,
 input[disabled]
 {
-    color: #999;
+    color: #888;
     border-color: #aaa;
+    background-color: #ccc; ;
     cursor: not-allowed;
 }
 

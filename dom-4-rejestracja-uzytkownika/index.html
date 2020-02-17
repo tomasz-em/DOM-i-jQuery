@@ -31,10 +31,12 @@
 
         <form id="registration-form" name="registration-form" action="#">
             <div>
-                <input type="text" id="your-email" name="your-email" placeholder="Twój@email" />
+                <input type="text" id="your-email" name="your-email" placeholder="Twój@email" title="Podaj indywidualny 'email'" />
             </div>
             <div class="password">
-                <input type="password" id="your-pass" name="your-pass" placeholder="Hasło" maxlength="30" />
+                <input type="password" id="your-pass" name="your-pass" placeholder="Hasło" title="Podaj 'hasło'" maxlength="30" />
+                <input type="password" id="your-pass-confirm" name="your-pass-confirm" placeholder="Potwierdź hasło (wpisz, nie wklejaj!)" 
+                    title="Potwierdź 'hasło' (wpisz, nie wklejaj!)" maxlength="30" />
                 <p title="użyj wielu grup znaków: małe i wielkie litery, cyfry oraz znaki specjalne">Hasło wymaga co najmniej <strong>sześciu</strong> znaków, maksymalnie <strong>trzydziestu pięciu</strong>; zalecana <strong>różnorodność</strong> grup znaków.</p>
             </div>
             <div class="password-strength">

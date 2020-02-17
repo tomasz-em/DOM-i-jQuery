@@ -7,6 +7,7 @@ hasło ze wskaźnikiem siły hasła o trzech stopniach: weak (poziom startowy), 
 
 var email = '',
     password = '',
+    confirmPassword = '',
     notificationElem,   // nie ma potrzeby tworzyć zmiennej, kosztowniejsze i prostsze jest każdorazowe zapytanie o ten element w DOMie
     submitDisabled = true,   // domyślna blokada na przesyłanie formularza (aby nie przekazać z kiepskim hasłem).. zwłaszcza poprzez [enter] w polu tekstowym 
     formRequiredFilledFields = {   // puste elementy ==> FALSE, blokujące wysłanie formularza jeśli nie posiadają treści
@@ -25,12 +26,14 @@ var email = '',
     },
     elemEmailId = 'your-email', // wartości pól z "*Id" używane w podległych zakresowi funkcjach
     elemPassId = 'your-pass',
+    elemPassConfirmId = 'your-pass-confirm',
     elemSubmitButtonId = 'register-me',
     elemFormID = 'registration-form',
     elemRegistartionComponentClass = 'registration-container',
 
     emailInput = document.getElementById( elemEmailId ),
     passInput = document.getElementById( elemPassId ),
+    passConfirmInput = document.getElementById( elemPassConfirmId ),
     submitBtn = document.getElementById( elemSubmitButtonId ),
     allPasswordStrengthNotifierLamps = document.getElementsByClassName('password-strength')[0].getElementsByTagName('li'),  // wszystkie LI wewnątrz konkretnego kontenera  
     weakStrengthNotifierLamp = document.getElementsByClassName('weak')[0],
@@ -63,6 +66,16 @@ passInput.addEventListener('input', function( evt ) {
     turnOnLamp( passwordQuality.passwordStage );    // tu WIZUALIZACJA, przeniesione z funkcji powyższej, by "bardziej czyste funkcje były
                                                     // + operowanie na obiekcie globalnym, jako parametr
 }, false);
+
+passConfirmInput.addEventListener('input', function( evt ) {
+    compareBothPasswords( evt.target );
+}, false);
+
+passConfirmInput.addEventListener('paste', function( evt ) {
+    evt.preventDefault();   // nie rób nic, gdy wklejane są treści w TO pole hasła
+    return false;   // dodatkowo wyjscie, gdyby poprzedni warunek nie zawsze działał 
+}, false);
+
 
 wholeForm.addEventListener('submit', tryToSubmit, false);
 
@@ -261,6 +274,8 @@ passwordQuality.uppercaseLetter = testForUppercaseChar( passwordText );
 passwordQuality.digitLetter = testForDigitChar( passwordText );
 passwordQuality.specialCharLetter = testForSpecialChar( passwordText );
 
+compareBothPasswords( passConfirmInput );    // wywołaj aktualziację w odniesieniu do elementu potwierdzenia hasła
+
     if ( isRightPasswordLength() ) {     // [6..35] i nie więcej znaków i zaświecanie pierwszej "lampki"; warunek wcześniej: ' || ( passwordQuality.currentLength > passwordQuality.maxLength ) ) {' 
         // ZMIENIĆ WARUNEK NA WYŻSZY ZAKRES< ALE ŻEBY GO NIE WYDŁUŻAŁ PONAD PRZEDZIAŁ 
             //... dwa razy jest weryfikowany warunek: najpierw na status, później względme statusu się zapala lub gaśnie wizualizacja :/
@@ -293,7 +308,7 @@ passwordQuality.specialCharLetter = testForSpecialChar( passwordText );
     // turnOffLamps();      // wywołania wbrew metodyce "czystego kodu"    
     }
     console.log(passwordQuality);
-}
+}   // evaluatePassword
 
 function turnOnLamp( status ) {
 
@@ -341,6 +356,24 @@ function isRightPasswordLength() {
 return false;
 }
 
+function compareBothPasswords( confirmElem ) {
+var currentConfirmLength = confirmElem.value.length,
+    masterPasswordLength = passInput.value,
+    masterPassword = passInput.value; 
+
+    if (  masterPasswordLength === 0 ) /* ||  && ( currentConfirmLength !== 0) ) */ {
+        // ?! co tutaj dać... czy zostawić puste?
+    }
+    else {
+        if ( confirmElem.value === masterPassword ) confirmElem.classList.remove('bad');
+        else {
+            if ( masterPassword.substr(0, currentConfirmLength) === confirmElem.value ) confirmElem.classList.remove('bad');
+            else confirmElem.classList.add('bad');
+        }
+    }
+
+}   // compareBothPasswords-END
+
 function tryToSubmit( evt ) {
     var personalData = {},
         goodFormData = true;
@@ -358,11 +391,13 @@ function tryToSubmit( evt ) {
             //...i tak nie są te dane póki co używane, nigdzie się ich nie umieszcza i nie przetwarza (jeszcze!)   
         password = passInput.value.substring(0, passwordQuality.maxLength);     // zastanowić się nad warunkiem, tu ewentualnie skróci tekst do maksimum akceptowalnego poziomu
 
-        console.log("Odebrane treści - email: '" + email + "' i pass: '" + password + "'");
+        confirmPassword = passConfirmInput.value.substring(0, passwordQuality.maxLength);   // wpis z pola potwierdzenia hasła
+
+        console.log("Odebrane treści - email: '" + email + "' i pass: '" + password + "' (i potwierdzenie: '" + confirmPassword + "')");
 
         deleteNotifications(); // czyszczenie z poprzedniego komunikatu lub komunikatów o błędzie danych wejściowych (o ile był wyświetlony)
 
-            if ( ( email == "" ) || ( password == "" ) ) {  // to się nie ma prawa pokazać, poprzednia logika nie zezwala na wypuszczenie pustych pól 
+            if ( ( email == "" ) || ( password == "" ) || ( confirmPassword == "" )) {  // to się nie ma prawa pokazać, poprzednia logika nie zezwala na wypuszczenie pustych pól 
             showNotification("BŁĄD: nie podano wszystkich wymaganych danych dla rejestracji w serwisie!");
             goodFormData = false;
             }
@@ -379,9 +414,15 @@ function tryToSubmit( evt ) {
             goodFormData = false;
             }
 
+            if ( password !== confirmPassword ) {   // inne treści w polach hasła
+            showNotification("BŁĄD: podano różne hasła (treść hasła nie zgadza się z potwierdzeniem)!");
+            goodFormData = false;
+            }
+    
             if ( goodFormData ) {       // założenie, że to są już prawidłowe dane... zatem jakieś działanie
-            passInput.setAttribute('disabled', true);   // blokowanie elementów formularza
             emailInput.setAttribute('disabled', true);
+            passInput.setAttribute('disabled', true);   // blokowanie elementów formularza
+            passConfirmInput.setAttribute('disabled', true);
             submitBtn.setAttribute('disabled', true);
             submitBtn.blur();       // usunięcie focusu z "submita"... choć przy użytej palecie to wcale nie wygląda na sukces ;)
 
