@@ -44,6 +44,7 @@ var currenciesUsed = [
         return currency.code;
     });
     // currenciesString = curenciesUsedCodes.join(',');   // teraz tabela kodów walut staje się tekstem, rozdzielonym przecinkami
+
         // STARTOWE MODYFIKACJE DOMu
     leftCurrencyAmountInput.value = leftCurrencyAmount;
     rightCurrencyAmountInput.value = rightCurrencyAmount;
@@ -52,7 +53,6 @@ var currenciesUsed = [
         leftCurrencyAmountInput.classList.add( classOfCurrentSourceValue );
     }    
     createHTMLOptionsForBothSelects();
-
 
                 
 // -----  zdarzenia  -----
@@ -166,7 +166,7 @@ var leftCurrencyTypeOK = checkCurrencyOptionSelected( leftCurrencyTypeSelect ),
             }
             else {
                 return null;    // !!! NIE KONWERTUJ, SKORO NIE OKREŚLONO CO ŹRÓDŁEM, A CO CELEM !!!
-                // w takim wypadku najlepeiej  wcześniej jedno z pól formularza WYBRAĆ ŹRÓDŁEM na sztywno, by tu nie trafił nigdy warunek 
+                // w takim wypadku najlepieej wcześniej jedno z pól formularza WYBRAĆ ŹRÓDŁEM na sztywno, by tu nie trafił NIGDY warunek
             }   // if-( anyInputTextPreviouslySelected )-END
         }   // if-( leftCurrencyTypeSelect.value != rightCurrencyTypeSelect.value )-END
         else {  // ... są IDENTYCZNE waluty wybrane w obu listach
@@ -184,7 +184,7 @@ var /* fakeEmptyObjAsEventObj = { target: leftCurrencyTypeSelect }, */
     leftCurrencyAmount = evaluateToNumber( leftCurrencyAmountInput.value );
     // leftCurrencyAmountInput.value = leftCurrencyAmount;  // aktualizacja wartości, gdyby wynik po konwersji był inny od źródła.. ale to pomija części dziesiętne
     if ( leftCurrencyAmount === null ) {  // !!! TA KOREKTA JEST ZBYT RESTRYKCYJNA ZE ZDARZENIEM "INPUT"!!! 
-                    // ...ale "nie pozwala wpisać" znaku innego, niż tworzącego poprawnny zapis tekstowy liczby całkowitej lub rzeczywistej
+                    // ...ale "nie pozwala wpisać" znaku innego, niż tworzącego poprawny zapis tekstowy liczby całkowitej lub rzeczywistej
         leftCurrencyAmount = 0;       // zamiast "nieoczekiwanego" nadpisywania ZEREM można użyć CSSa, by przekazać że dane wejściowe są złe
         leftCurrencyAmountInput.value = 0;  // ...ale to wymaga też blokowania działania, póki te dane nie zostaną naprawione (tu zdarznie INPUT mogłoby być okresowo wyłączane 
                                  // ...lub jakiś parametr dla funkcji, by nie przetwarzać wartości pole formularza od razu)
@@ -206,7 +206,7 @@ var /* fakeEmptyObjAsEventObj = { target: leftCurrencyTypeSelect }, */
             rightCurrencyAmountInput.value = rightCurrencyAmount.toFixed(2);   // odświeżenie zawartości drugiego pola (wyjścowy format walutowy)
         }
         else {
-            rightCurrencyAmountInput.value = "WARTOŚĆ NIEPRZELICZONA"
+            rightCurrencyAmountInput.value = "WARTOŚĆ NIEPRZELICZONA";
         }
     }
 

@@ -36,11 +36,6 @@ select
     border: 2px solid #aaa;
 }
 
-/* select
-{
-    width: 15.2em;
-} */
-
 select:hover:not(:disabled),
 select:focus:not(:disabled),
 input:hover:not(:disabled),
@@ -107,21 +102,6 @@ label > span {
     border-color: #444;;
 }
 
-
-.animate-rotation-180 {
-    /* animation: rotate-y-180 0.3s;
-    animation-fill-mode: both; */
-
-    transform: rotateY(180deg);     /* prostsze podejście, bez tworzneia dwóch klas i animacji oraz zabawy z jej trybami i cofaniem/nadawaniem zmian */
-}
-
-
-/* @keyframes rotate-y-180 {
-    100% { 
-        transform: rotateY(180deg);
-    }
-} */
-
 .notification {
     max-width: 525px;
     margin: 1em auto;
@@ -152,8 +132,6 @@ label > span {
     border-color: #444;
     color: orangered;
 }
-
-
 
 .currency-converter-container ~ .notification { /* lepszy selektor rodzeństwa niż położenie: .notification:first-of-type */
     margin-top: 2em;    /* choć TA SAMA reguła jest w poprzeniku */
