@@ -11,7 +11,7 @@
   - interakcja z elementami (elementy aktywne formularzy, wskaźnik myszki a dowolne elementy) 
 * komunikacja poprzez AJAX
 * użycie w REST API
-### użycie biblioteki jQuery do łatwiejszego osiągnięcia powyższych celów
+### użycie biblioteki jQuery do łatwiejszego osiągnięcia powyższych celów (dotyczy tylko listy z jQuery!)
 
 _____
 
@@ -24,7 +24,7 @@ W trakcie trwania odliczania oba inputy mają być zablokowane (disabled).
 
 ![Komponent timera](https://tomasz-em.github.io/DOM-i-jQuery/polecenia-dom--obrazy/dom-1-timer.jpg "Komponent timera")
 
-[Rozwiązanie dla tego zadania (0/1)](https://tomasz-em.github.io/DOM-i-jQuery/dom-1-timer/index.html)
+**[Rozwiązanie dla tego zadania (1/1)](https://tomasz-em.github.io/DOM-i-jQuery/dom-1-timer/index.html)**
 |
 [Plik JS z poleceniem i rozwiązaniem](https://tomasz-em.github.io/DOM-i-jQuery/dom-1-timer/timer.js)
 
@@ -35,7 +35,7 @@ imię subskrybenta, input na e-mail subskrybenta, button "Subscribe" i miejsce n
 
 ![Komponent newslettera](https://tomasz-em.github.io/DOM-i-jQuery/polecenia-dom--obrazy/dom-2-newsletter.jpg "Komponent newslettera")
 
-[Rozwiązanie dla tego zadania (0/1)](https://tomasz-em.github.io/DOM-i-jQuery/dom-2-newsletter/index.html)
+**[Rozwiązanie dla tego zadania (1/1)](https://tomasz-em.github.io/DOM-i-jQuery/dom-2-newsletter/index.html)**
 |
 [Plik JS z poleceniem i rozwiązaniem](https://tomasz-em.github.io/DOM-i-jQuery/dom-2-newsletter/newsletter.js)
 
@@ -46,7 +46,7 @@ Fahrenheita i odwrotnie; musi mieć guzik do szybkiego odwrócenia konwersji.
 
 ![Komponent konwertera temperatury](https://tomasz-em.github.io/DOM-i-jQuery/polecenia-dom--obrazy/dom-3-konwerter-C--F.jpg "Komponent konwertera temperatury")
 
-[Rozwiązanie dla tego zadania (0/1)](https://tomasz-em.github.io/DOM-i-jQuery/dom-3-konwerter-C--F/index.html)
+**[Rozwiązanie dla tego zadania (1/1)](https://tomasz-em.github.io/DOM-i-jQuery/dom-3-konwerter-C--F/index.html)**
 |
 [Plik JS z poleceniem i rozwiązaniem](https://tomasz-em.github.io/DOM-i-jQuery/dom-3-konwerter-C--F/temp-converter.js)
 
@@ -57,9 +57,17 @@ hasło ze wskaźnikiem siły hasła o trzech stopniach: weak (poziom startowy), 
 (min. 8 znaków, min. 1 wielka litera) i strong (min. 12 znaków, min. 1 wielka litera, min.
 1 cyfra). Przycisk Sign up ma być aktywny, gdy oba pola są wypełnione.
 
+#### Aktualizacja - ROZSZERZENIE FUNKCJONALNOŚCI
+Hasło jest *prawidłowe* dopiero, gdy spełnia **zmienione wymagania złożoności** - zmodyfikowano zasady punktowania siły hasła:
+
+* *słabe* - minimum sześć znaków
+* *średnie* - minimum osiem znaków, przy czym muszą być użyte znaki z co najmniej dwóch grup (pełna lista: małe litery, duże litery, cyfry, znaki specjalne)
+* *trudne* - minimum dwanaście znaków, przy czym muszą być użyte znaki ze wszystkich grup.
+Dodano także **pole do potwierdzenia hasła**, skuteczne wysłanie formularza tylko przy zgodności obu wpisanych haseł.
+
 ![Komponent rejestracji użytkownika](https://tomasz-em.github.io/DOM-i-jQuery/polecenia-dom--obrazy/dom-4-rejestracja-uzytkownika.jpg "Komponent rejestracji użytkownika")
 
-[Rozwiązanie dla tego zadania (0/1)](https://tomasz-em.github.io/DOM-i-jQuery/dom-4-rejestracja-uzytkownika/index.html)
+**[Rozwiązanie dla tego zadania (1/1)](https://tomasz-em.github.io/DOM-i-jQuery/dom-4-rejestracja-uzytkownika/index.html)**
 |
 [Plik JS z poleceniem i rozwiązaniem](https://tomasz-em.github.io/DOM-i-jQuery/dom-4-rejestracja-uzytkownika/register-me.js)
 
@@ -70,9 +78,12 @@ oraz odpowiedni button; musi listować zapisane zadania do wykonania wraz z inpu
 typu checkbox, który ma służyć odznaczaniu wykonanych zadań. Ponadto, checkbox
 “show completed” ma powodować wylistowanie wszystkich wykonanych zadań.
 
+#### Aktualizacja - ROZSZERZENIE FUNKCJONALNOŚCI
+Umożliwiono tworzenie i przechowywanie duplikatów zadań (ta sama nazwa i status wykonania). Wygenerowana lista w przeglądarce **nie zawiera dodatkowych atrybutów**, żadne z "zadań" **nie jest** opatrzone indeksem lub inną wartością opisową poprzez dodatkowy atrybut HTMLa. Logika aplikacji określa położenie elementu lub/i krotności wystąpienia danego elementu jako duplikatu.
+
 ![Komponent listy to-do](https://tomasz-em.github.io/DOM-i-jQuery/polecenia-dom--obrazy/dom-5-lista-to-do.jpg "Komponent listy to-do")
 
-[Rozwiązanie dla tego zadania (0/1)](https://tomasz-em.github.io/DOM-i-jQuery/dom-5-lista-to-do/index.html)
+**[Rozwiązanie dla tego zadania (1/1)](https://tomasz-em.github.io/DOM-i-jQuery/dom-5-lista-to-do/index.html)**
 |
 [Plik JS z poleceniem i rozwiązaniem](https://tomasz-em.github.io/DOM-i-jQuery/dom-5-lista-to-do/to-do-list.js)
 
@@ -81,15 +92,18 @@ typu checkbox, który ma służyć odznaczaniu wykonanych zadań. Ponadto, check
 Stwórz kalkulator walut; musi mieć select umożliwiający wybór waluty źródłowej i select
 umożliwiający wybór waluty docelowej spośród złotych, euro, dolarów i funtów;
 kalkulator walut dokonuje przeliczeń w oparciu o ceny zwrócone z API fixer.io
-Wejdź na stronę [fixer.io/signup/free](fixer.io/signup/free) i zarejestruj się. Na potrzeby rejestracji możesz
+Wejdź na stronę [https://fixer.io/signup/free/](https://fixer.io/signup/free/) i zarejestruj się. Na potrzeby rejestracji możesz
 podać tymczasowy e-mail. Celem jest uzyskanie klucza dostępu do API.
 Wykonaj zapytanie typu GET pod adres podany poniżej; pamiętaj, aby wstawić we wskazane miejsce `swój klucz API`:
 [http://data.fixer.io/api/latest?access_key=KLUCZ_DO_API&symbols=PLN,EUR,USD](http://data.fixer.io/api/latest?access_key=KLUCZ_DO_API&symbols=PLN,EUR,USD)
 W zależności od walut przekazanych do parametru symbols, serwer zwróci inną odpowiedź zawierającą ceny żądanych walut.
 
+#### Aktualizacja - OGRANICZENIA API
+Darmowe API (plan *Free*) nie pozwala przeliczać wskazanej waluty na dowolną inną. Narzucone jest `euro` jako waluta bazowa, a wszelkie zwracane wartości odnoszą się do stosunku euro do wybranej waluty lub walut. Darmowe API posiada także szereg innych ograniczeń, szczegóły w dokumentacji serwisu.
+
 ![Komponent kalkulatora walut](https://tomasz-em.github.io/DOM-i-jQuery/polecenia-dom--obrazy/dom-6-kalkulator-walut.jpg "Komponent kalkulatora walut")
 
-[Rozwiązanie dla tego zadania (0/1)](https://tomasz-em.github.io/DOM-i-jQuery/dom-6-kalkulator-walut/index.html)
+**[Rozwiązanie dla tego zadania (1/1)](https://tomasz-em.github.io/DOM-i-jQuery/dom-6-kalkulator-walut/index.html)**
 |
 [Plik JS z poleceniem i rozwiązaniem](https://tomasz-em.github.io/DOM-i-jQuery/dom-6-kalkulator-walut/currency-calculator.js)
 
@@ -157,7 +171,7 @@ W pliku ```index.html``` znajdziesz link o id ```googleLink```. Zapisz  jego atr
 W pliku ```index.html``` znajdziesz sekcję o klasie ```links```. Pobierz atrybut data-hover do zmiennej i wypisz go w konsoli. Spróbuj za pomocą funkcji ```data``` oraz ```attr```.
 Jak widzisz są one źle wpisane w html, spróbuj je podmienić za pomocą funkcji data().
 
-[Rozwiązania dla tej listy zadań (10/10)](https://tomasz-em.github.io/DOM-i-jQuery/1-wyszukiwanie-elementow/index.html)
+**[Rozwiązania dla tej listy zadań (10/10)](https://tomasz-em.github.io/DOM-i-jQuery/1-wyszukiwanie-elementow/index.html)**
 |
 [Plik JS z poleceniami i rozwiązaniami](https://tomasz-em.github.io/DOM-i-jQuery/1-wyszukiwanie-elementow/app.js)
 
@@ -183,7 +197,7 @@ Znajdź w pliku **index.html** element z **klasą** ```shopping```. Wykonaj nast
 * Podmień tekst przycisku na ```Dodano```.
 * Po ponownym kliknięciu zresetuj ustawienia elementu ```cart-item```.
 
-[Rozwiązania dla tej listy zadań (4/4)](https://tomasz-em.github.io/DOM-i-jQuery/2-obsluga-eventow/index.html)
+**[Rozwiązania dla tej listy zadań (4/4)](https://tomasz-em.github.io/DOM-i-jQuery/2-obsluga-eventow/index.html)**
 |
 [Plik JS z poleceniami i rozwiązaniami](https://tomasz-em.github.io/DOM-i-jQuery/2-obsluga-eventow/app.js)
 
@@ -215,7 +229,7 @@ Zastąp nazwy miesięcy nazwami poszczególnych funkcji, z których korzystasz, 
 ### Zadanie 4
 Zapoznaj się z plikiem **index.html**. Znajdź w nim elementy z **klasą** ```block```, a następnie zapisz je do zmiennej. Napisz funkcję, która po kliknięciu elementu z **klasą** ```block``` usunie dany element z kolumny z **klasą** ```left``` i przeniesie go do kolumny z **klasą** ```right```.
 
-[Rozwiązania dla tej listy zadań (4/4)](https://tomasz-em.github.io/DOM-i-jQuery/3-modyfikowanie-elementow/index.html)
+**[Rozwiązania dla tej listy zadań (4/4)](https://tomasz-em.github.io/DOM-i-jQuery/3-modyfikowanie-elementow/index.html)**
 |
 [Plik JS z poleceniami i rozwiązaniami](https://tomasz-em.github.io/DOM-i-jQuery/3-modyfikowanie-elementow/app.js)
 
@@ -236,7 +250,7 @@ Znajdź w pliku **index.html** element o **klasie** ```people```. Wykonaj w niej
 * napisz funkcję, która po kliknięciu w przycisk ```Edytuj``` umożliwi edycję elementu
 W trakcie edycji zmień tekst przycisku z ```Edytuj``` na ```Zatwierdź```. Po klinięciu w ```Zatwierdź``` zakończ edycję.
 
-[Rozwiązania dla tej listy zadań (2/2)](https://tomasz-em.github.io/DOM-i-jQuery/4-obsluga-eventow-ciag-dalszy/index.html)
+**[Rozwiązania dla tej listy zadań (2/2)](https://tomasz-em.github.io/DOM-i-jQuery/4-obsluga-eventow-ciag-dalszy/index.html)**
 |
 [Plik JS z poleceniami i rozwiązaniami](https://tomasz-em.github.io/DOM-i-jQuery/4-obsluga-eventow-ciag-dalszy/app.js)
 
@@ -259,7 +273,7 @@ Przydatne informacje:
 * do elementu **h3** dodaj tytuł filmu
 * wstaw element **h3** do **li**, a następnie wszystko do listy **ul**
 
-[Rozwiązanie dla tej listy zadań (1/1)](https://tomasz-em.github.io/DOM-i-jQuery/5-obsluga-ajax-czesc-i/index.html)
+**[Rozwiązanie dla tej listy zadań (1/1)](https://tomasz-em.github.io/DOM-i-jQuery/5-obsluga-ajax-czesc-i/index.html)**
 |
 [Plik JS z poleceniem i rozwiązaniem](https://tomasz-em.github.io/DOM-i-jQuery/5-obsluga-ajax-czesc-i/app.js)
 
@@ -281,6 +295,6 @@ Każdą nazwę święta wczytaj do elementu **li**, jego datę również wczytaj
 ### Uwaga
 Sprawdź w konsoli jak wyglądają wczytywane dane, aby ułatwić sobie ich obróbkę.
 
-[Rozwiązanie dla tej listy zadań (1/1)](https://tomasz-em.github.io/DOM-i-jQuery/6-obsluga-ajax-czesc-ii/index.html)
+**[Rozwiązanie dla tej listy zadań (1/1)](https://tomasz-em.github.io/DOM-i-jQuery/6-obsluga-ajax-czesc-ii/index.html)**
 |
 [Plik JS z poleceniem i rozwiązaniem](https://tomasz-em.github.io/DOM-i-jQuery/6-obsluga-ajax-czesc-ii/app.js)
