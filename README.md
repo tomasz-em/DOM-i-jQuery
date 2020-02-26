@@ -63,6 +63,7 @@ Hasło jest *prawidłowe* dopiero, gdy spełnia **zmienione wymagania złożono�
 * *słabe* - minimum sześć znaków
 * *średnie* - minimum osiem znaków, przy czym muszą być użyte znaki z co najmniej dwóch grup (pełna lista: małe litery, duże litery, cyfry, znaki specjalne)
 * *trudne* - minimum dwanaście znaków, przy czym muszą być użyte znaki ze wszystkich grup.
+
 Dodano także **pole do potwierdzenia hasła**, skuteczne wysłanie formularza tylko przy zgodności obu wpisanych haseł.
 
 ![Komponent rejestracji użytkownika](https://tomasz-em.github.io/DOM-i-jQuery/polecenia-dom--obrazy/dom-4-rejestracja-uzytkownika.jpg "Komponent rejestracji użytkownika")
