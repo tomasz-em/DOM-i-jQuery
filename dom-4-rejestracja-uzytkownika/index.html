@@ -19,7 +19,6 @@
                 tory nisko: https://i.picsum.photos/id/204/150/150.jpg,
                 człek i wodospad: https://i.picsum.photos/id/1035/150/150.jpg,
                 auto i zachód: https://i.picsum.photos/id/551/150/150.jpg,
-
             -->
         </div>
 
@@ -31,20 +30,20 @@
 
         <form id="registration-form" name="registration-form" action="#">
             <div>
-                <input type="text" id="your-email" name="your-email" placeholder="Twój@email" title="Podaj indywidualny 'email'" />
+                <input type="text" id="your-email" name="your-email" placeholder="Twój@email" title="Podaj adres 'email' (najlepiej aktywny), by być rozpoznawalnym w serwisie. UWAGA: Adres nie będzie upubliczniony, chyba że o tym zadecydujesz!" />
             </div>
             <div class="password">
-                <input type="password" id="your-pass" name="your-pass" placeholder="Hasło" title="Podaj 'hasło'" maxlength="30" />
+                <input type="password" id="your-pass" name="your-pass" placeholder="Hasło" title="Ustaw swoje 'hasło'" maxlength="30" />
                 <input type="password" id="your-pass-confirm" name="your-pass-confirm" placeholder="Potwierdź hasło (wpisz, nie wklejaj!)" 
                     title="Potwierdź 'hasło' (wpisz, nie wklejaj!)" maxlength="30" />
-                <p title="użyj wielu grup znaków: małe i wielkie litery, cyfry oraz znaki specjalne">Hasło wymaga co najmniej <strong>sześciu</strong> znaków, maksymalnie <strong>trzydziestu pięciu</strong>; zalecana <strong>różnorodność</strong> grup znaków.</p>
+                <p title="użyj wielu znaków spośród dostępnych grup: małe litery, wielkie litery, cyfry oraz znaki specjalne; wskaż kursorem poszczególny wyróżnik siły hasła, by poznać jego wymagania">Hasło wymaga co najmniej <strong>sześciu</strong> znaków, maksymalnie <strong>trzydziestu pięciu</strong>; zalecana <strong>różnorodność</strong> grup znaków.</p>
             </div>
             <div class="password-strength">
                 <p>siła Twojego hasła:</p>
                 <ul>
-                    <li class="weak"></li>
-                    <li class="average"></li>
-                    <li class="strong"></li>    
+                    <li class="weak" title="'słabe' - minimum sześć znaków"></li>
+                    <li class="average" title="'średnie' - minimum osiem znaków, przy czym muszą być użyte znaki z co najmniej dwóch grup (pełna lista: małe litery, duże litery, cyfry, znaki specjalne)"></li>
+                    <li class="strong" title="'trudne' - minimum dwanaście znaków, przy czym muszą być użyte znaki ze wszystkich dostępnych grup"></li>    
                 </ul> 
             </div>
             <div>
